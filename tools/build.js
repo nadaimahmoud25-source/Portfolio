@@ -14,6 +14,11 @@ const PAGES = [
 // The artifact pins its header and side menu with JS transforms (it scrolls inside
 // a canvas); on a real page that jitters, so the site uses CSS position: sticky.
 const SITE_CSS = `<style id="site-fixes">
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:88px}
+#pg-nav[data-pinned="1"]{margin-bottom:28px}
+#pg-nav{transition:padding .25s ease,margin-bottom .25s ease,box-shadow .25s ease !important}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 #pg-nav{position:sticky !important;top:0;transform:none !important;will-change:auto}
 #cs-toc-nav{transform:none !important}
 @media (min-width: 900px){.cs-aside{position:sticky;top:96px}}
