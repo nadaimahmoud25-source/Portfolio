@@ -236,17 +236,18 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
   .h2-stage,.h2-btn b,.h2-burger span,.h2-menu,.pr-img img,.pr-img svg{transition:none}
   .ill-draw,.net,.net-main{animation:none;stroke-dashoffset:0}.net,.net-main,.ill-pulse,.ill-flow,.ill-pop,.ill-cursor,.ill-spin,.ill-spin2,.ill-type rect,.ill-a,.ill-b,.ill-c,.ill-stack{animation:none}
 }
-/* scroll reveals: sections ease in as they come into view (script sets data-sr on <html>, data-in on each block) */
-[data-sr] .h2-whead,[data-sr] .pr-head{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
-[data-sr] .h2-card{opacity:0;translate:0 48px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1s cubic-bezier(.22,1,.36,1)}
-[data-sr] .h2-card .h2-tile{clip-path:inset(8% 5% 0 5% round 12px);transition:clip-path 1.2s cubic-bezier(.22,1,.36,1)}
-[data-sr] .h2-card:nth-child(even),[data-sr] .h2-card:nth-child(even) .h2-tile{transition-delay:.12s}
-[data-sr] .pr-row .pr-txt{opacity:0;translate:0 24px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
-[data-sr] .pr-row .pr-img{opacity:0;transition:opacity 1s cubic-bezier(.22,1,.36,1) .12s,translate 1s cubic-bezier(.22,1,.36,1) .12s}
-[data-sr] .pr-row.l .pr-img{translate:48px 0}
-[data-sr] .pr-row.r .pr-img{translate:-48px 0}
-[data-sr] .h2-whead[data-in],[data-sr] .pr-head[data-in],[data-sr] .h2-card[data-in],[data-sr] .pr-row[data-in] .pr-txt,[data-sr] .pr-row.l[data-in] .pr-img,[data-sr] .pr-row.r[data-in] .pr-img{opacity:1;translate:0 0}
-[data-sr] .h2-card[data-in] .h2-tile{clip-path:inset(0 0 0 0 round 12px)}
+/* scroll reveals: blocks start hidden (only when scripts run and motion is allowed) and ease in when the script sets data-in */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference){
+.h2-whead,.pr-head{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
+.h2-card{opacity:0;translate:0 48px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1s cubic-bezier(.22,1,.36,1)}
+.h2-card .h2-tile{clip-path:inset(8% 5% 0 5% round 12px);transition:clip-path 1.2s cubic-bezier(.22,1,.36,1)}
+.pr-row .pr-txt{opacity:0;translate:0 24px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
+.pr-row .pr-img{opacity:0;transition:opacity 1s cubic-bezier(.22,1,.36,1) .12s,translate 1s cubic-bezier(.22,1,.36,1) .12s}
+.pr-row.l .pr-img{translate:48px 0}
+.pr-row.r .pr-img{translate:-48px 0}
+.h2-whead[data-in],.pr-head[data-in],.h2-card[data-in],.pr-row[data-in] .pr-txt,.pr-row.l[data-in] .pr-img,.pr-row.r[data-in] .pr-img{opacity:1;translate:0 0}
+.h2-card[data-in] .h2-tile{clip-path:inset(0 0 0 0 round 12px)}
+}
 </style>
 <script>
 /* Direction of the page transition: going to the home page plays it backwards. */
@@ -395,19 +396,20 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { clearInterval(this.clock); if (this.srIo) this.srIo.disconnect(); if (this.prio) this.prio.disconnect(); if (this.drawIo) this.drawIo.disconnect(); window.removeEventListener('resize', this.wireLayout); }
   revealInit() {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce || typeof IntersectionObserver === 'undefined') return;
     var els = document.querySelectorAll('.h2-whead, .h2-card, .pr-head, .pr-row');
+    var show = function (el) { el.setAttribute('data-in', '1'); };
+    if (typeof IntersectionObserver === 'undefined') { for (var j = 0; j < els.length; j++) show(els[j]); return; }
     var vh = window.innerHeight || 800;
     var self = this;
     this.srIo = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.setAttribute('data-in', '1'); self.srIo.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      es.forEach(function (e) { if (e.isIntersecting) { show(e.target); self.srIo.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+    // Blocks already on screen at load play in one after another, just after the hero; the rest wait for scroll.
+    var k = 0;
     for (var i = 0; i < els.length; i++) {
-      if (els[i].getBoundingClientRect().top < vh * 0.9) els[i].setAttribute('data-in', '1');
+      if (els[i].getBoundingClientRect().top < vh * 0.94) { (function (el, d) { setTimeout(function () { show(el); }, d); })(els[i], 450 + k * 140); k++; }
       else this.srIo.observe(els[i]);
     }
-    document.documentElement.setAttribute('data-sr', '1');
   }
   wiresInit() {
     var self = this;
