@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#FFFFFF}
+#pg-nav{position:relative;z-index:50;transition:padding .25s ease,box-shadow .25s ease;will-change:transform}
+#pg-nav[data-pinned="1"]{padding:14px 0 !important;background:rgba(255,255,255,.94);box-shadow:0 0 0 100vmax rgba(255,255,255,.94),0 1px 0 100vmax #E6E6E3;clip-path:inset(0 -100vmax -1px -100vmax);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.ttl{width:fit-content}
 @media (max-width: 699px){.cs-herotile{aspect-ratio:4 / 5 !important;border-radius:20px !important}.cs-herotile > div{left:5% !important;right:5% !important;top:7% !important}}
 a{color:#0E0F11}a:hover{color:#2643E9}
 @keyframes csUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -47,10 +50,11 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 <div id="dc-root"></div>
 <template id="dc-template">
 
-<div style="background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div id="pg-root" style="position: relative; background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ pmarks }}" as="m" hint-placeholder-count="0"><span data-p="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>
 <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); box-sizing: border-box">
 
-<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
+<header id="pg-nav" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
 <a href="index.html" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #0E0F11"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">Nada Ibrahim</span><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Senior Product Designer</span></a>
 <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
 <a class="cs-toc" href="index.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">← All work</a>
@@ -64,7 +68,7 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 <p class="cs-up" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Case study · Awaed · Web Trader MVP</p>
 <h1 class="cs-up cs-d1" style="margin: 0; max-width: 900px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(30px, 3.3vw, 46px); line-height: 1.12; font-weight: 500; letter-spacing: -0.025em">Awaed Web Trader</h1>
 <p class="cs-up cs-d2" style="margin: 0; max-width: 640px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: #4A4D52">A trading MVP for two markets and two languages, designed in three weeks. Awaed needed a web app fast, as the foundation for its future trading products.</p>
-<p class="cs-up cs-d2" style="margin: 0; font-size: 14px; color: #6B6F76">0 to 1 ∙ Design system ∙ Web ∙ Released internally</p>
+<p class="cs-up cs-d2" style="margin: 0; font-size: 14px; color: #6B6F76">0 to 1 ∙ Design system ∙ Web ∙ In beta</p>
 </section>
 
 <div class="cs-herotile" style="position: relative; aspect-ratio: 16 / 9; border-radius: 24px; background: #D9E4DA; overflow: hidden">
@@ -90,7 +94,7 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 
 <div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Timeline</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">3 weeks</dd></div>
 <div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Platform</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Web · English + Arabic</dd></div>
-<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Status</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Released internally</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Status</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">In beta</dd></div>
 <div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Outcome</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Options trading built on it</dd></div>
 </dl>
 
@@ -310,6 +314,7 @@ class Component extends DCLogic {
     this.onScroll = this.onScroll.bind(this);
   }
   componentDidMount() {
+    this.pinInit();
     window.addEventListener('resize', this.measure);
     document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
     this.observe();
@@ -344,6 +349,7 @@ class Component extends DCLogic {
     for (var j = 0; j < els.length; j++) this.rvio.observe(els[j]);
   }
   componentWillUnmount() {
+    this.pinStop();
     window.removeEventListener('resize', this.measure);
     document.removeEventListener('scroll', this.onScroll, { capture: true });
     clearTimeout(this.later);
@@ -396,7 +402,7 @@ class Component extends DCLogic {
     var offset = 0;
     if (window.innerWidth >= 900) {
       var max = rowH - asideTop - nav.offsetHeight - 48;
-      offset = Math.max(0, Math.min(top + 32 - asideTop, max));
+      offset = Math.max(0, Math.min(top + 104 - asideTop, max));
     }
     nav.style.transform = offset > 0 ? 'translateY(' + Math.round(offset) + 'px)' : '';
     var line = top + (bottom - top) * 0.3;
@@ -407,6 +413,49 @@ class Component extends DCLogic {
     }
     if (this.lockUntil && Date.now() < this.lockUntil) return;
     if (current !== this.state.active) this.setState({ active: current });
+  }
+  pinInit() {
+    var self = this;
+    this.pn = 1500;
+    this.pvis = {};
+    this.pinScroll = function () {
+      var root = document.getElementById('pg-root');
+      if (!root) return;
+      var r = root.getBoundingClientRect();
+      if (r.top < 0) self.pinApply(-r.top);
+    };
+    document.addEventListener('scroll', this.pinScroll, { passive: true, capture: true });
+    var root = document.getElementById('pg-root');
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    this.pio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = Number(e.target.getAttribute('data-p'));
+        if (e.isIntersecting) self.pvis[i] = 1; else delete self.pvis[i];
+      });
+      var keys = Object.keys(self.pvis);
+      if (!keys.length) return;
+      var lo = Infinity;
+      for (var k = 0; k < keys.length; k++) { var v = Number(keys[k]); if (v < lo) lo = v; }
+      self.pinApply(lo / (self.pn - 1) * root.offsetHeight);
+    });
+    var marks = root.querySelectorAll('[data-p]');
+    for (var m = 0; m < marks.length; m++) this.pio.observe(marks[m]);
+  }
+  pinStop() {
+    if (this.pio) this.pio.disconnect();
+    if (this.pinScroll) document.removeEventListener('scroll', this.pinScroll, { capture: true });
+  }
+  pinApply(top) {
+    var nav = document.getElementById('pg-nav');
+    if (!nav) return;
+    var off = Math.max(0, Math.round(top));
+    nav.style.transform = off > 4 ? 'translateY(' + off + 'px)' : '';
+    nav.setAttribute('data-pinned', off > 4 ? '1' : '0');
+  }
+  pinMarks() {
+    var out = [];
+    for (var i = 0; i < 1500; i++) out.push({ i: i, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / 1499 * 100).toFixed(3) + '%' });
+    return out;
   }
   renderVals() {
     var self = this;
@@ -443,8 +492,7 @@ class Component extends DCLogic {
     var en = st.lang === 'en', us = st.mode === 'us';
     var rv = {};
     ['map', 'modes', 'rules', 'file', 'closing'].forEach(function (k) { rv[k] = 'cs-rv' + (st.rv[k] ? ' in' : ''); });
-    return {
-      toc: toc, marks: marks, rv: rv,
+    return { pmarks: self.pinMarks(), toc: toc, marks: marks, rv: rv,
       heroEnStyle: seg(en), heroArStyle: seg(!en),
       heroEnPressed: en ? 'true' : 'false', heroArPressed: en ? 'false' : 'true',
       heroEnImg: img(en, true), heroArImg: img(!en, false),

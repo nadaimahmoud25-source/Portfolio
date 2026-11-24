@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#FFFFFF}
+#pg-nav{position:relative;z-index:50;transition:padding .25s ease,box-shadow .25s ease;will-change:transform}
+#pg-nav[data-pinned="1"]{padding:14px 0 !important;background:rgba(255,255,255,.94);box-shadow:0 0 0 100vmax rgba(255,255,255,.94),0 1px 0 100vmax #E6E6E3;clip-path:inset(0 -100vmax -1px -100vmax);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.ttl{width:fit-content}
 @media (max-width: 699px){.cs-herotile{aspect-ratio:4 / 5 !important;border-radius:20px !important}.cs-herotile > div{left:5% !important;right:5% !important;top:7% !important}}
 a{color:#0E0F11}a:hover{color:#2643E9}
 @keyframes csUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -39,10 +42,11 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 <div id="dc-root"></div>
 <template id="dc-template">
 
-<div style="background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div id="pg-root" style="position: relative; background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ pmarks }}" as="m" hint-placeholder-count="0"><span data-p="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>
 <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); box-sizing: border-box">
 
-<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
+<header id="pg-nav" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
 <a href="index.html" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #0E0F11"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">Nada Ibrahim</span><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Senior Product Designer</span></a>
 <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
 <a class="cs-toc" href="index.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">← All work</a>
@@ -125,6 +129,30 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 <div style="display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
 <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 01</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">It starts with who gets in</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Eligibility is the first thing a user meets, so the experience starts there: a short questionnaire on market direction, risk, a knowledge check and risk tolerance, ending in a clear eligibility result. Once the business confirmed the direction, I designed the full experience in one week, section by section, and worked through the PRD so every rule and edge case had a designed state.</p>
+</div>
+<figure class="{{ rv.onb }}" data-rv="onb" onMouseEnter="{{ hovOIn }}" onMouseLeave="{{ hovOOut }}" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="border-radius: 20px; background: #F4F4F1; padding: clamp(16px, 2.4vw, 32px); display: flex; flex-direction: column; gap: clamp(14px, 1.8vw, 22px)">
+<div class="cs-steps" role="group" aria-label="Onboarding steps" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{ onbSteps }}" as="st" hint-placeholder-count="5">
+<button class="cs-seg" type="button" onClick="{{ st.go }}" aria-pressed="{{ st.pressed }}" style="{{ st.style }}"><span style="{{ st.numStyle }}">{{ st.num }}</span><span class="cs-steplabel">{{ st.label }}</span></button>
+</sc-for>
+</div>
+<div style="position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 20px 50px rgba(40, 30, 90, 0.16)">
+<sc-for list="{{ onbShots }}" as="sh" hint-placeholder-count="5">
+<img class="cs-fade" src="{{ sh.src }}" alt="{{ sh.alt }}" style="{{ sh.style }}">
+</sc-for>
+<span aria-hidden="true" style="{{ onbBar }}"></span>
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">Unlock Options Trading: direction, risk disclosure, knowledge check and risk tolerance, ending in an eligibility result.</figcaption>
+</figure>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 02</p>
 <h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">Two directions, tested in a one-day prototype</h3>
 <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Direction A showed one table at a time, calls or puts. Direction B put calls and puts side by side, the way professional platforms do. I built a prototype of both in a day, so the business could compare them in use instead of imagining them.</p>
 </div>
@@ -145,7 +173,7 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 
 <div style="display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
-<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 02</p>
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 03</p>
 <h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">One table, because we were designing for retail</h3>
 <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">We were targeting retail users, so one table made more sense: it keeps the choice to a single question, do you expect the price to rise or fall? For more advanced traders, I added two things to the roadmap: a toggle to switch to the side-by-side view, and a strategy builder.</p>
 </div>
@@ -165,30 +193,6 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 <figcaption style="font-size: 13px; line-height: 1.5; color: #6B6F76">Puts · pick "Down" and the put payoff lights up: profit if the price falls.</figcaption>
 </figure>
 </div>
-</div>
-
-<div style="display: flex; flex-direction: column; gap: 28px">
-<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
-<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 03</p>
-<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">Then the full experience, starting with who gets in</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Once the business confirmed the direction, I completed the experience in one week while researching the market. Eligibility is the first thing a user meets, so that is where I started. I broke the designs into sections, from eligibility and onboarding to the options view, order, positions, exercise and expiry, and worked through the PRD so every rule and edge case had a designed state.</p>
-</div>
-<figure class="{{ rv.onb }}" data-rv="onb" onMouseEnter="{{ hovOIn }}" onMouseLeave="{{ hovOOut }}" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
-<div style="border-radius: 20px; background: #F4F4F1; padding: clamp(16px, 2.4vw, 32px); display: flex; flex-direction: column; gap: clamp(14px, 1.8vw, 22px)">
-<div class="cs-steps" role="group" aria-label="Onboarding steps" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
-<sc-for list="{{ onbSteps }}" as="st" hint-placeholder-count="5">
-<button class="cs-seg" type="button" onClick="{{ st.go }}" aria-pressed="{{ st.pressed }}" style="{{ st.style }}"><span style="{{ st.numStyle }}">{{ st.num }}</span><span class="cs-steplabel">{{ st.label }}</span></button>
-</sc-for>
-</div>
-<div style="position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 20px 50px rgba(40, 30, 90, 0.16)">
-<sc-for list="{{ onbShots }}" as="sh" hint-placeholder-count="5">
-<img class="cs-fade" src="{{ sh.src }}" alt="{{ sh.alt }}" style="{{ sh.style }}">
-</sc-for>
-<span aria-hidden="true" style="{{ onbBar }}"></span>
-</div>
-</div>
-<figcaption style="font-size: 13px; color: #6B6F76">Unlock Options Trading: direction, risk disclosure, knowledge check and risk tolerance, ending in an eligibility result.</figcaption>
-</figure>
 </div>
 </section>
 
@@ -247,21 +251,33 @@ class Component extends DCLogic {
     this.onScroll = this.onScroll.bind(this);
   }
   componentDidMount() {
+    this.pinInit();
     window.addEventListener('resize', this.measure);
     document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
     this.observe();
     this.later = setTimeout(this.measure, 600);
     this.reveal();
+    this.watchPlayers();
     var self = this;
     if (!this.reduce) {
       this.timer = setInterval(function () {
-        var st = self.state, h = st.hov || {}, n = {}, step = 200, dur = 4200, ch = false;
-        if (st.jAuto && !h.j) { var jt = (st.jt || 0) + step; if (jt >= dur) { n.j = (st.j + 1) % 5; jt = 0; } n.jt = jt; ch = true; }
-        if (st.oAuto && !h.o) { var ot = (st.ot || 0) + step; if (ot >= dur) { n.o = (st.o + 1) % 5; ot = 0; } n.ot = ot; ch = true; }
-        if (st.dirAuto && !h.d) { var dt = (st.dt || 0) + step; if (dt >= dur) { n.dir = st.dir === 'a' ? 'b' : 'a'; dt = 0; } n.dt = dt; ch = true; }
+        var st = self.state, h = st.hov || {}, v = self.inView || {}, n = {}, step = 200, dur = 4200, ch = false;
+        if (st.jAuto && !h.j && v.journey) { var jt = (st.jt || 0) + step; if (jt >= dur) { n.j = (st.j + 1) % 5; jt = 0; } n.jt = jt; ch = true; }
+        if (st.oAuto && !h.o && v.onb) { var ot = (st.ot || 0) + step; if (ot >= 6500) { n.o = (st.o + 1) % 5; ot = 0; } n.ot = ot; ch = true; }
+        if (st.dirAuto && !h.d && v.dirs) { var dt = (st.dt || 0) + step; if (dt >= dur) { n.dir = st.dir === 'a' ? 'b' : 'a'; dt = 0; } n.dt = dt; ch = true; }
         if (ch) self.setState(n);
       }, 200);
     }
+  }
+  watchPlayers() {
+    var self = this;
+    this.inView = {};
+    var keys = ['journey', 'onb', 'dirs'];
+    if (typeof IntersectionObserver === 'undefined') { keys.forEach(function (k) { self.inView[k] = true; }); return; }
+    this.pvio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { self.inView[e.target.getAttribute('data-rv')] = e.isIntersecting; });
+    }, { threshold: 0.4 });
+    keys.forEach(function (k) { var el = document.querySelector('[data-rv="' + k + '"]'); if (el) self.pvio.observe(el); });
   }
   reveal() {
     var self = this;
@@ -282,12 +298,14 @@ class Component extends DCLogic {
     for (var j = 0; j < els.length; j++) this.rvio.observe(els[j]);
   }
   componentWillUnmount() {
+    this.pinStop();
     window.removeEventListener('resize', this.measure);
     document.removeEventListener('scroll', this.onScroll, { capture: true });
     clearTimeout(this.later);
     clearInterval(this.timer);
     if (this.io) this.io.disconnect();
     if (this.rvio) this.rvio.disconnect();
+    if (this.pvio) this.pvio.disconnect();
   }
   measure() {
     var body = document.getElementById('cs-body');
@@ -334,7 +352,7 @@ class Component extends DCLogic {
     var offset = 0;
     if (window.innerWidth >= 900) {
       var max = rowH - asideTop - nav.offsetHeight - 48;
-      offset = Math.max(0, Math.min(top + 32 - asideTop, max));
+      offset = Math.max(0, Math.min(top + 104 - asideTop, max));
     }
     nav.style.transform = offset > 0 ? 'translateY(' + Math.round(offset) + 'px)' : '';
     var line = top + (bottom - top) * 0.3;
@@ -345,6 +363,49 @@ class Component extends DCLogic {
     }
     if (this.lockUntil && Date.now() < this.lockUntil) return;
     if (current !== this.state.active) this.setState({ active: current });
+  }
+  pinInit() {
+    var self = this;
+    this.pn = 1500;
+    this.pvis = {};
+    this.pinScroll = function () {
+      var root = document.getElementById('pg-root');
+      if (!root) return;
+      var r = root.getBoundingClientRect();
+      if (r.top < 0) self.pinApply(-r.top);
+    };
+    document.addEventListener('scroll', this.pinScroll, { passive: true, capture: true });
+    var root = document.getElementById('pg-root');
+    if (!root || typeof IntersectionObserver === 'undefined') return;
+    this.pio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = Number(e.target.getAttribute('data-p'));
+        if (e.isIntersecting) self.pvis[i] = 1; else delete self.pvis[i];
+      });
+      var keys = Object.keys(self.pvis);
+      if (!keys.length) return;
+      var lo = Infinity;
+      for (var k = 0; k < keys.length; k++) { var v = Number(keys[k]); if (v < lo) lo = v; }
+      self.pinApply(lo / (self.pn - 1) * root.offsetHeight);
+    });
+    var marks = root.querySelectorAll('[data-p]');
+    for (var m = 0; m < marks.length; m++) this.pio.observe(marks[m]);
+  }
+  pinStop() {
+    if (this.pio) this.pio.disconnect();
+    if (this.pinScroll) document.removeEventListener('scroll', this.pinScroll, { capture: true });
+  }
+  pinApply(top) {
+    var nav = document.getElementById('pg-nav');
+    if (!nav) return;
+    var off = Math.max(0, Math.round(top));
+    nav.style.transform = off > 4 ? 'translateY(' + off + 'px)' : '';
+    nav.setAttribute('data-pinned', off > 4 ? '1' : '0');
+  }
+  pinMarks() {
+    var out = [];
+    for (var i = 0; i < 1500; i++) out.push({ i: i, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / 1499 * 100).toFixed(3) + '%' });
+    return out;
   }
   renderVals() {
     var self = this;
@@ -385,8 +446,8 @@ class Component extends DCLogic {
     var numSt = function (on, done) {
       return 'flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; font-size: 11px; font-weight: 700; background: ' + (on ? '#5B4FD6' : (done ? '#D9D6F5' : '#E6E6E3')) + '; color: ' + (on ? '#FFFFFF' : '#4A4580');
     };
-    var bar = function (t, paused) {
-      return 'position: absolute; left: 0; bottom: 0; height: 3px; background: #5B4FD6; transition: width .2s linear, opacity .3s ease; width: ' + (Math.min(1, (t || 0) / 4200) * 100).toFixed(1) + '%; opacity: ' + (paused ? '0.45' : '1');
+    var bar = function (t, paused, d) {
+      return 'position: absolute; left: 0; bottom: 0; height: 3px; background: #5B4FD6; transition: width .2s linear, opacity .3s ease; width: ' + (Math.min(1, (t || 0) / (d || 4200)) * 100).toFixed(1) + '%; opacity: ' + (paused ? '0.45' : '1');
     };
     var J = [
       ['Eligibility', '53db275428cc9da46bbcd122b51e7f74', 'Eligibility result: you are eligible for options trading, with what you can do and the Shariah-restricted strategies', 'cover', 'center'],
@@ -409,10 +470,9 @@ class Component extends DCLogic {
     var a = st.dir === 'a';
     var rv = {};
     ['journey', 'dirs', 'calls', 'onb', 'closing'].forEach(function (k) { rv[k] = 'cs-rv' + (st.rv[k] ? ' in' : ''); });
-    return {
-      toc: toc, marks: marks, rv: rv,
+    return { pmarks: self.pinMarks(), toc: toc, marks: marks, rv: rv,
       journeySteps: journeySteps, journeyShots: journeyShots, journeyBar: st.jAuto ? bar(st.jt, (st.hov || {}).j) : 'display: none',
-      onbSteps: onbSteps, onbShots: onbShots, onbBar: st.oAuto ? bar(st.ot, (st.hov || {}).o) : 'display: none',
+      onbSteps: onbSteps, onbShots: onbShots, onbBar: st.oAuto ? bar(st.ot, (st.hov || {}).o, 6500) : 'display: none',
       hovJIn: function () { self.setState({ hov: Object.assign({}, self.state.hov, { j: true }) }); },
       hovJOut: function () { self.setState({ hov: Object.assign({}, self.state.hov, { j: false }) }); },
       hovOIn: function () { self.setState({ hov: Object.assign({}, self.state.hov, { o: true }) }); },
