@@ -269,7 +269,7 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
 
 <header class="h2-nav">
 <a class="h2-mark" href="#top">NADA IBRAHIM</a>
-<p class="h2-where" style="margin: 0"><span>Working remotely</span><i></i><span class="t">{{ time }}</span></p>
+<p class="h2-where" style="margin: 0"><span>Working remotely</span></p>
 <button class="h2-burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}"><span></span><span></span></button>
 <nav class="h2-menu" aria-label="Main" style="{{ menuStyle }}">
 <a href="#work" onClick="{{ closeMenu }}">Work</a>
@@ -386,7 +386,6 @@ class Component extends DCLogic {
   }
   componentDidMount() {
     var self = this;
-    this.clock = setInterval(function () { self.setState({ time: self.now() }); }, 20000);
     this.wiresInit();
     this.revealInit();
     var startDraw = function () { var as = document.querySelectorAll('.pr-img.c1 animate, .pr-img.c1 animateMotion'); for (var i = 0; i < as.length; i++) { try { as[i].beginElement(); } catch (e) {} } };
