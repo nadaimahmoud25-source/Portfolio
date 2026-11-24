@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: Awaed Options Trading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+@media (max-width: 699px){.cs-herotile{aspect-ratio:4 / 5 !important;border-radius:20px !important}.cs-herotile > div{left:5% !important;right:5% !important;top:7% !important}}
+a{color:#0E0F11}a:hover{color:#2643E9}
+@keyframes csUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cs-up{animation:csUp .8s cubic-bezier(.2,.7,.2,1) both}
+.cs-d1{animation-delay:.1s}.cs-d2{animation-delay:.2s}
+.cs-toc{transition:color .2s ease,border-color .2s ease}
+@media (max-width: 899px){.cs-aside{display:none !important}}.cs-toc:hover{color:#0E0F11}
+.cs-next .cs-shot{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.cs-next:hover .cs-shot{transform:translateY(-8px)}
+.cs-rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.cs-rv.in{opacity:1;transform:none}
+.cs-fade{transition:opacity .8s ease}
+.cs-seg{transition:background-color .3s ease,color .3s ease,box-shadow .3s ease}
+.cs-seg:focus-visible{outline:2px solid #5B4FD6;outline-offset:2px}
+@keyframes csRise{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+.cs-rise{animation:csRise 1.2s .25s cubic-bezier(.2,.7,.2,1) both}
+@keyframes csFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.cs-float{animation:csFloat 7s ease-in-out infinite}
+.cs-float2{animation:csFloat 7s 1.2s ease-in-out infinite}
+.cs-float3{animation:csFloat 7s 2.4s ease-in-out infinite}
+@keyframes csBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.cs-bar{transform-origin:0 50%;animation:csBar 4.2s linear both}
+@keyframes csBar2{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (max-width: 699px){.cs-steps{grid-template-columns:repeat(5,minmax(0,1fr)) !important}.cs-steps .cs-steplabel{display:none}}
+@media (prefers-reduced-motion: reduce){.cs-up,.cs-rise,.cs-float,.cs-float2,.cs-float3,.cs-bar{animation:none}.cs-next .cs-shot,.cs-rv,.cs-fade,.cs-seg{transition:none}.cs-rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-template">
+
+<div style="background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); box-sizing: border-box">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
+<a href="index.html" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #0E0F11"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">Nada Ibrahim</span><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Senior Product Designer</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
+<a class="cs-toc" href="index.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">← All work</a>
+<a class="cs-toc" href="index.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">About</a>
+<a class="cs-toc" href="#" style="font-size: 15px; color: #6B6F76; text-decoration: none">Résumé</a>
+<a href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #F4F4F1; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Get in touch</a>
+</nav>
+</header>
+
+<section style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; padding: clamp(56px, 7vw, 104px) 0 clamp(40px, 5vw, 64px)">
+<p class="cs-up" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Case study · Awaed · Options trading</p>
+<h1 class="cs-up cs-d1" style="margin: 0; max-width: 900px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(30px, 3.3vw, 46px); line-height: 1.12; font-weight: 500; letter-spacing: -0.025em">Awaed Options Trading</h1>
+<p class="cs-up cs-d2" style="margin: 0; max-width: 640px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: #4A4D52">A proof of concept in one day and the full experience in one week. Options trading for retail investors, where the objective decided the design.</p>
+<p class="cs-up cs-d2" style="margin: 0; font-size: 14px; color: #6B6F76">0 to 1 ∙ Web + mobile ∙ Validated with a prototype ∙ In beta</p>
+</section>
+
+<div class="cs-herotile" style="position: relative; aspect-ratio: 16 / 9; border-radius: 24px; background: #E3E1F5; overflow: hidden">
+<div class="cs-rise" style="position: absolute; left: 8%; right: 8%; top: 10%; bottom: -4%; border-radius: 14px 14px 0 0; background: #FFFFFF; box-shadow: 0 30px 80px rgba(40, 30, 90, 0.2); display: flex; flex-direction: column; overflow: hidden">
+<div style="height: 40px; flex: none; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-bottom: 1px solid #EFEEEA"><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span></div>
+<div style="flex: 1; min-height: 0; background: #000000"><img src="assets/57257e292df3d642d136cbfd41e182e3.webp" alt="Buying a TSLA call option: the option chain with the 447.50 call selected, and the order ticket showing contracts, limit price and an estimated gain and loss chart" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center"></div>
+</div>
+</div>
+
+<dl style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; margin: 40px 0 0; border-top: 1px solid #E6E6E3">
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">My role</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Lead Designer</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Team</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">PM</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Timeline</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">1-day POC · 1 week to full experience</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Platform</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Trading on web &amp; Mobile</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Status</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">In beta</dd></div>
+
+</dl>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; padding: clamp(48px, 6vw, 80px) 0">
+<div style="padding: 28px; border-radius: 20px; background: #F4F4F1; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Problem</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Options are complex and can expire worthless. Awaed needed them to make sense for retail investors, not only for pros.</p></div>
+<div style="padding: 28px; border-radius: 20px; background: #F4F4F1; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">What I did</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Prototyped two directions in a day, let the retail objective decide, then designed the full experience in a week.</p></div>
+<div style="padding: 28px; border-radius: 20px; background: #E9EDFD; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Result</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Business confirmed the direction, and every rule in the PRD had a designed state, from eligibility to exercise.</p></div>
+</section>
+
+<div id="cs-body" style="position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 64px; padding-bottom: clamp(72px, 9vw, 128px); border-top: 1px solid #E6E6E3; padding-top: clamp(48px, 6vw, 80px); justify-content: center">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ marks }}" as="m" hint-placeholder-count="0"><span data-i="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>
+
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: clamp(120px, 12vw, 184px)">
+
+<section id="context" style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">01 · Context</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">Options for retail investors, on the Web Trader foundation</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4D52">Awaed added US options trading, and it had to move fast. The audience was retail investors, many of them new to options. I designed it for both Awaed Web, built on the Web Trader system, and the mobile app. As the lead and only designer, I owned the experience end to end, working closely with the PM.</p>
+</section>
+
+<section id="challenge" style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">02 · The challenge</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">A complex, high-risk product for first-time traders</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4D52">Options can expire worthless, and many of our users had never traded them. The experience had to make the risk clear without scaring people away, while following Shariah rules and Awaed’s own trading rules.</p>
+</div>
+<figure class="{{ rv.journey }}" data-rv="journey" onMouseEnter="{{ hovJIn }}" onMouseLeave="{{ hovJOut }}" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="border-radius: 20px; background: #F4F4F1; padding: clamp(16px, 2.4vw, 32px); display: flex; flex-direction: column; gap: clamp(14px, 1.8vw, 22px)">
+<div class="cs-steps" role="group" aria-label="Journey steps" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{ journeySteps }}" as="st" hint-placeholder-count="5">
+<button class="cs-seg" type="button" onClick="{{ st.go }}" aria-pressed="{{ st.pressed }}" style="{{ st.style }}"><span style="{{ st.numStyle }}">{{ st.num }}</span><span class="cs-steplabel">{{ st.label }}</span></button>
+</sc-for>
+</div>
+<div style="position: relative; aspect-ratio: 16 / 8; border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 20px 50px rgba(40, 30, 90, 0.16)">
+<sc-for list="{{ journeyShots }}" as="sh" hint-placeholder-count="5">
+<img class="cs-fade" src="{{ sh.src }}" alt="{{ sh.alt }}" style="{{ sh.style }}">
+</sc-for>
+<span aria-hidden="true" style="{{ journeyBar }}"></span>
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">The options journey, from the eligibility check to exercising a contract. Steps play in order. Hover to pause, or pick a step to jump to it.</figcaption>
+</figure>
+</section>
+
+<section id="decisions" style="display: flex; flex-direction: column; gap: clamp(88px, 9vw, 128px)">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">03 · Key decisions</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">Letting the objective decide</h2>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 01</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">Two directions, tested in a one-day prototype</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Direction A showed one table at a time, calls or puts. Direction B put calls and puts side by side, the way professional platforms do. I built a prototype of both in a day, so the business could compare them in use instead of imagining them.</p>
+</div>
+<figure class="{{ rv.dirs }}" data-rv="dirs" onMouseEnter="{{ hovDIn }}" onMouseLeave="{{ hovDOut }}" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 16 / 10; border-radius: 20px; background: #E9EDFD; overflow: hidden; display: flex; flex-direction: column; padding: clamp(16px, 2.4vw, 32px) clamp(16px, 2.4vw, 32px) 0; box-sizing: border-box; gap: clamp(12px, 1.6vw, 20px)">
+<div role="group" aria-label="Design direction" style="align-self: center; display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 4px 16px rgba(38, 67, 233, 0.08)">
+<button class="cs-seg" type="button" onClick="{{ dirA }}" aria-pressed="{{ dirAPressed }}" style="{{ dirAStyle }}">A · One table</button>
+<button class="cs-seg" type="button" onClick="{{ dirB }}" aria-pressed="{{ dirBPressed }}" style="{{ dirBStyle }}">B · Side by side</button>
+</div>
+<div style="position: relative; flex: 1; min-height: 0; width: 100%; max-width: 980px; align-self: center; border-radius: 12px 12px 0 0; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(38, 67, 233, 0.2)">
+<img class="cs-fade" src="assets/fe3d7e6f3bf8a94e6f107c03276fb281.webp" alt="Direction A: a Calls and Puts toggle above a single option chain table, with expiry dates and the order panel on the right" style="{{ dirAImg }}">
+<img class="cs-fade" src="assets/5cadec6e2f68c3d2ffdaea0ddd38a04d.webp" alt="Direction B: calls and puts side by side around the strike price column, like professional platforms" style="{{ dirBImg }}">
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">The two directions from the one-day prototype, on the same TSLA chain.</figcaption>
+</figure>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 02</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">One table, because we were designing for retail</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">We were targeting retail users, so one table made more sense: it keeps the choice to a single question, do you expect the price to rise or fall? For more advanced traders, I added two things to the roadmap: a toggle to switch to the side-by-side view, and a strategy builder.</p>
+</div>
+<div class="{{ rv.calls }}" data-rv="calls" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; aspect-ratio: 4 / 5; border-radius: 20px; background: #F4F4F1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 8%; box-sizing: border-box">
+<p style="position: absolute; top: 16px; left: 16px; margin: 0; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px; font-weight: 600; color: #0E0F11"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: #1E9E52"></span>Calls</p>
+<img class="cs-float" src="assets/813c8ddd4ea4906ef5591ef67905d92a.webp" alt="Onboarding step: where do you think AAPL is heading? Up is selected, highlighting Calls, profit if price rises" style="display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 24px 40px rgba(0, 0, 0, 0.22)">
+</div>
+<figcaption style="font-size: 13px; line-height: 1.5; color: #6B6F76">Calls · pick "Up" and the call payoff lights up: profit if the price rises.</figcaption>
+</figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; aspect-ratio: 4 / 5; border-radius: 20px; background: #F4F4F1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 8%; box-sizing: border-box">
+<p style="position: absolute; top: 16px; left: 16px; margin: 0; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px; font-weight: 600; color: #0E0F11"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: #D93B3B"></span>Puts</p>
+<img class="cs-float2" src="assets/0865f36feea0725a8cb4f1f0b2a6cc49.webp" alt="The same step with Down selected, highlighting Puts, profit if price falls" style="display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 24px 40px rgba(0, 0, 0, 0.22)">
+</div>
+<figcaption style="font-size: 13px; line-height: 1.5; color: #6B6F76">Puts · pick "Down" and the put payoff lights up: profit if the price falls.</figcaption>
+</figure>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 03</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">Then the full experience, starting with who gets in</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Once the business confirmed the direction, I completed the experience in one week while researching the market. Eligibility is the first thing a user meets, so that is where I started. I broke the designs into sections, from eligibility and onboarding to the options view, order, positions, exercise and expiry, and worked through the PRD so every rule and edge case had a designed state.</p>
+</div>
+<figure class="{{ rv.onb }}" data-rv="onb" onMouseEnter="{{ hovOIn }}" onMouseLeave="{{ hovOOut }}" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="border-radius: 20px; background: #F4F4F1; padding: clamp(16px, 2.4vw, 32px); display: flex; flex-direction: column; gap: clamp(14px, 1.8vw, 22px)">
+<div class="cs-steps" role="group" aria-label="Onboarding steps" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{ onbSteps }}" as="st" hint-placeholder-count="5">
+<button class="cs-seg" type="button" onClick="{{ st.go }}" aria-pressed="{{ st.pressed }}" style="{{ st.style }}"><span style="{{ st.numStyle }}">{{ st.num }}</span><span class="cs-steplabel">{{ st.label }}</span></button>
+</sc-for>
+</div>
+<div style="position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000000; box-shadow: 0 20px 50px rgba(40, 30, 90, 0.16)">
+<sc-for list="{{ onbShots }}" as="sh" hint-placeholder-count="5">
+<img class="cs-fade" src="{{ sh.src }}" alt="{{ sh.alt }}" style="{{ sh.style }}">
+</sc-for>
+<span aria-hidden="true" style="{{ onbBar }}"></span>
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">Unlock Options Trading: direction, risk disclosure, knowledge check and risk tolerance, ending in an eligibility result.</figcaption>
+</figure>
+</div>
+</section>
+
+</div>
+
+<aside class="cs-aside" aria-label="On this page" style="flex: 1 1 200px; min-width: 0; max-width: 240px; align-self: flex-start">
+<nav id="cs-toc-nav" style="display: flex; flex-direction: column; gap: 2px; will-change: transform; justify-content: flex-start; align-items: flex-start">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">On this page</p>
+<sc-for list="{{ toc }}" as="item" hint-placeholder-count="6">
+<a class="cs-toc" href="{{ item.href }}" onClick="{{ item.go }}" aria-current="{{ item.current }}" style="{{ item.style }}">{{ item.label }}</a>
+</sc-for>
+</nav>
+</aside>
+
+</div>
+
+<div class="{{ rv.closing }}" data-rv="closing" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 20px; background: #E3E1F5; overflow: hidden">
+<div class="cs-float" style="position: absolute; left: 9%; right: 9%; top: 11%; bottom: -6%; border-radius: 12px 12px 0 0; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(40, 30, 90, 0.25)"><img src="assets/46c62e5356ff66920847f31c4bc4dcab.webp" alt="Options position on the TSLA page: a 447.50 call with an expiry countdown, and Exercise and Close Call actions" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 0 18%"></div>
+</div>
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 20px; background: #E3E1F5; overflow: hidden; display: flex; align-items: flex-start; justify-content: center; gap: 4%; padding: 9% 6% 0; box-sizing: border-box">
+<img class="cs-float" src="assets/53dcadd8d6023e93f3711ac8859f216c.webp" alt="Mobile transactions: buy 1 TSLA 447.50 call" style="width: 28%; height: auto; margin-top: 8%; transform-origin: 50% 100%; filter: drop-shadow(0 18px 30px rgba(40, 30, 90, 0.22))">
+<img class="cs-float2" src="assets/c9a51a687cdf2a2c5c4800b99464dc87.webp" alt="Mobile transactions: sell to close 1 TSLA 447.50 call" style="width: 28%; height: auto; filter: drop-shadow(0 18px 30px rgba(40, 30, 90, 0.22))">
+<img class="cs-float3" src="assets/ff90874603b70a140f15a2287cc39db9.webp" alt="Mobile transactions: exercise 1 TSLA 447.50 call" style="width: 28%; height: auto; margin-top: 8%; filter: drop-shadow(0 18px 30px rgba(40, 30, 90, 0.22))">
+</div>
+</div>
+
+
+<section id="contact" style="margin: clamp(72px, 9vw, 128px) 0 32px; padding: clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px); border-radius: 28px; background: #F4F4F1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px">
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">Got an unclear brief? <span style="color: #6B6F76">Let’s talk.</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="mailto:nada.i.mahmoud25@gmail.com" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Email me</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #D6D6D2; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">LinkedIn</a>
+</div>
+</section>
+
+</div>
+</div>
+</template>
+<script src="js/preact.min.js"></script>
+<script src="js/dc.js"></script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { active: 'context', rv: {}, j: 0, jAuto: true, o: 0, oAuto: true, dir: 'a', dirAuto: true, tick: 0 };
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this.n = 2000;
+    this.vis = {};
+    this.sections = [
+      { id: 'context', label: 'Context' },
+      { id: 'challenge', label: 'The challenge' },
+      { id: 'decisions', label: 'Key decisions' }
+    ];
+    this.measure = this.measure.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.measure);
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    this.observe();
+    this.later = setTimeout(this.measure, 600);
+    this.reveal();
+    var self = this;
+    if (!this.reduce) {
+      this.timer = setInterval(function () {
+        var st = self.state, h = st.hov || {}, n = {}, step = 200, dur = 4200, ch = false;
+        if (st.jAuto && !h.j) { var jt = (st.jt || 0) + step; if (jt >= dur) { n.j = (st.j + 1) % 5; jt = 0; } n.jt = jt; ch = true; }
+        if (st.oAuto && !h.o) { var ot = (st.ot || 0) + step; if (ot >= dur) { n.o = (st.o + 1) % 5; ot = 0; } n.ot = ot; ch = true; }
+        if (st.dirAuto && !h.d) { var dt = (st.dt || 0) + step; if (dt >= dur) { n.dir = st.dir === 'a' ? 'b' : 'a'; dt = 0; } n.dt = dt; ch = true; }
+        if (ch) self.setState(n);
+      }, 200);
+    }
+  }
+  reveal() {
+    var self = this;
+    var els = document.querySelectorAll('[data-rv]');
+    if (typeof IntersectionObserver === 'undefined' || this.reduce) {
+      var all = {};
+      for (var i = 0; i < els.length; i++) all[els[i].getAttribute('data-rv')] = 1;
+      this.setState({ rv: all });
+      return;
+    }
+    this.rvio = new IntersectionObserver(function (entries) {
+      var add = {}; var any = false;
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { add[e.target.getAttribute('data-rv')] = 1; any = true; self.rvio.unobserve(e.target); }
+      });
+      if (any) self.setState({ rv: Object.assign({}, self.state.rv, add) });
+    }, { threshold: 0.15 });
+    for (var j = 0; j < els.length; j++) this.rvio.observe(els[j]);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.measure);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    clearTimeout(this.later);
+    clearInterval(this.timer);
+    if (this.io) this.io.disconnect();
+    if (this.rvio) this.rvio.disconnect();
+  }
+  measure() {
+    var body = document.getElementById('cs-body');
+    if (!body) return;
+    this.observe();
+  }
+  observe() {
+    var body = document.getElementById('cs-body');
+    if (!body || typeof IntersectionObserver === 'undefined') return;
+    if (this.io) this.io.disconnect();
+    var self = this;
+    this.vis = {};
+    this.io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = Number(e.target.getAttribute('data-i'));
+        if (e.isIntersecting) self.vis[i] = 1; else delete self.vis[i];
+      });
+      var keys = Object.keys(self.vis).map(Number);
+      if (!keys.length) return;
+      var lo = keys[0], hi = keys[0];
+      for (var k = 1; k < keys.length; k++) { if (keys[k] < lo) lo = keys[k]; if (keys[k] > hi) hi = keys[k]; }
+      var h = body.offsetHeight;
+      self.apply(lo / (self.n - 1) * h, hi / (self.n - 1) * h);
+    });
+    var marks = body.querySelectorAll('[data-i]');
+    for (var m = 0; m < marks.length; m++) this.io.observe(marks[m]);
+  }
+  onScroll() {
+    var body = document.getElementById('cs-body');
+    if (!body) return;
+    var r = body.getBoundingClientRect();
+    var vh = window.innerHeight;
+    if (r.height <= vh + 2) return;
+    this.apply(Math.max(0, -r.top), Math.min(r.height, vh - r.top));
+  }
+  apply(top, bottom) {
+    var body = document.getElementById('cs-body');
+    var nav = document.getElementById('cs-toc-nav');
+    if (!body || !nav) return;
+    var aside = nav.parentNode;
+    var br = body.getBoundingClientRect();
+    var asideTop = aside.getBoundingClientRect().top - br.top;
+    var rowH = body.offsetHeight;
+    var offset = 0;
+    if (window.innerWidth >= 900) {
+      var max = rowH - asideTop - nav.offsetHeight - 48;
+      offset = Math.max(0, Math.min(top + 32 - asideTop, max));
+    }
+    nav.style.transform = offset > 0 ? 'translateY(' + Math.round(offset) + 'px)' : '';
+    var line = top + (bottom - top) * 0.3;
+    var current = this.sections[0].id;
+    for (var i = 0; i < this.sections.length; i++) {
+      var el = document.getElementById(this.sections[i].id);
+      if (el && el.getBoundingClientRect().top - br.top <= line) current = this.sections[i].id;
+    }
+    if (this.lockUntil && Date.now() < this.lockUntil) return;
+    if (current !== this.state.active) this.setState({ active: current });
+  }
+  renderVals() {
+    var self = this;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var marks = [];
+    for (var i = 0; i < this.n; i++) marks.push({ i: i, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / (this.n - 1) * 100).toFixed(3) + '%' });
+    var toc = this.sections.map(function (s) {
+      var on = s.id === self.state.active;
+      return {
+        href: '#' + s.id,
+        label: s.label,
+        current: on ? 'location' : 'false',
+        style: 'display: block; padding: 6px 0 6px 14px; border-left: 2px solid ' + (on ? '#0E0F11' : '#E6E6E3') + '; font-size: 14px; font-weight: ' + (on ? '500' : '400') + '; color: ' + (on ? '#0E0F11' : '#6B6F76') + '; text-decoration: none',
+        go: function (e) {
+          var el = document.getElementById(s.id);
+          if (!el) return;
+          if (e && e.preventDefault) e.preventDefault();
+          el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          self.lockUntil = Date.now() + 1200;
+          self.setState({ active: s.id });
+        }
+      };
+    });
+    var st = this.state;
+    var B = 'assets/';
+    var seg = function (on) {
+      return 'min-height: 30px; padding: 0 14px; border: 0; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 600; background: ' + (on ? '#0E0F11' : 'transparent') + '; color: ' + (on ? '#FFFFFF' : '#4A4D52');
+    };
+    var stack = function (on, first, fit, pos) {
+      return (first ? 'position: relative' : 'position: absolute; top: 0; left: 0') + '; display: block; width: 100%; height: 100%; object-fit: ' + (fit || 'cover') + '; object-position: ' + (pos || 'top center') + '; opacity: ' + (on ? '1' : '0');
+    };
+    var layer = function (on, fit, pos) {
+      return 'position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: ' + (fit || 'cover') + '; object-position: ' + (pos || 'top center') + '; opacity: ' + (on ? '1' : '0');
+    };
+    var stepBtn = function (on, done) {
+      return 'display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px; border: 0; border-radius: 12px; cursor: pointer; text-align: left; font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.25; background: ' + (on ? '#FFFFFF' : 'transparent') + '; color: ' + (on ? '#0E0F11' : '#6B6F76') + '; box-shadow: ' + (on ? '0 6px 18px rgba(40, 30, 90, 0.10)' : 'none');
+    };
+    var numSt = function (on, done) {
+      return 'flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; font-size: 11px; font-weight: 700; background: ' + (on ? '#5B4FD6' : (done ? '#D9D6F5' : '#E6E6E3')) + '; color: ' + (on ? '#FFFFFF' : '#4A4580');
+    };
+    var bar = function (t, paused) {
+      return 'position: absolute; left: 0; bottom: 0; height: 3px; background: #5B4FD6; transition: width .2s linear, opacity .3s ease; width: ' + (Math.min(1, (t || 0) / 4200) * 100).toFixed(1) + '%; opacity: ' + (paused ? '0.45' : '1');
+    };
+    var J = [
+      ['Eligibility', '53db275428cc9da46bbcd122b51e7f74', 'Eligibility result: you are eligible for options trading, with what you can do and the Shariah-restricted strategies', 'cover', 'center'],
+      ['Choose a contract', 'fe3d7e6f3bf8a94e6f107c03276fb281', 'Option chain: calls for TSLA with expiry dates and strike prices', 'cover', 'top center'],
+      ['Place the order', '57257e292df3d642d136cbfd41e182e3', 'Order ticket for the 447.50 call with an estimated gain and loss chart', 'cover', 'top center'],
+      ['Track the position', '46c62e5356ff66920847f31c4bc4dcab', 'Options position with an expiry countdown and Exercise and Close Call actions', 'cover', '0 70%'],
+      ['Exercise or expire', '15112dc25e14095acb7480e6ae26b561', 'Exercise dialog: you can exercise a maximum of 2 contracts, with a low balance warning', 'contain', 'center']
+    ];
+    var O = [
+      ['Direction', '76a630f133ecbc40eb870f26251f9b4b', 'Step 1: where do you think AAPL is heading, with calls and puts payoff charts'],
+      ['Risk disclosure', '2a62cde34e3086ba4630f4db864c076e', 'Step 2: options risk disclosure, from total capital loss to auto-liquidation and Shariah compliance'],
+      ['Knowledge', '7f03d340240ee6c307bee4b1b7bba9c1', 'Step 3: options trading knowledge questions'],
+      ['Risk tolerance', 'b61020d58e152dffd0dc69bbc4519c2d', 'Step 4: your risk tolerance questions'],
+      ['Eligible', '53db275428cc9da46bbcd122b51e7f74', 'Result: you are eligible for options trading']
+    ];
+    var journeySteps = J.map(function (d, i) { return { num: String(i + 1), label: d[0], style: stepBtn(st.j === i, i < st.j), numStyle: numSt(st.j === i, i < st.j), pressed: st.j === i ? 'true' : 'false', go: function () { self.setState({ j: i, jAuto: false }); } }; });
+    var journeyShots = J.map(function (d, i) { return { src: B + d[1] + '.webp', alt: d[2], style: layer(st.j === i, d[3], d[4]) }; });
+    var onbSteps = O.map(function (d, i) { return { num: i === 4 ? '✓' : String(i + 1), label: d[0], style: stepBtn(st.o === i, i < st.o), numStyle: numSt(st.o === i, i < st.o), pressed: st.o === i ? 'true' : 'false', go: function () { self.setState({ o: i, oAuto: false }); } }; });
+    var onbShots = O.map(function (d, i) { return { src: B + d[1] + '.webp', alt: d[2], style: layer(st.o === i, 'cover', 'top center') }; });
+    var a = st.dir === 'a';
+    var rv = {};
+    ['journey', 'dirs', 'calls', 'onb', 'closing'].forEach(function (k) { rv[k] = 'cs-rv' + (st.rv[k] ? ' in' : ''); });
+    return {
+      toc: toc, marks: marks, rv: rv,
+      journeySteps: journeySteps, journeyShots: journeyShots, journeyBar: st.jAuto ? bar(st.jt, (st.hov || {}).j) : 'display: none',
+      onbSteps: onbSteps, onbShots: onbShots, onbBar: st.oAuto ? bar(st.ot, (st.hov || {}).o) : 'display: none',
+      hovJIn: function () { self.setState({ hov: Object.assign({}, self.state.hov, { j: true }) }); },
+      hovJOut: function () { self.setState({ hov: Object.assign({}, self.state.hov, { j: false }) }); },
+      hovOIn: function () { self.setState({ hov: Object.assign({}, self.state.hov, { o: true }) }); },
+      hovOOut: function () { self.setState({ hov: Object.assign({}, self.state.hov, { o: false }) }); },
+      hovDIn: function () { self.setState({ hov: Object.assign({}, self.state.hov, { d: true }) }); },
+      hovDOut: function () { self.setState({ hov: Object.assign({}, self.state.hov, { d: false }) }); },
+      dirAStyle: seg(a), dirBStyle: seg(!a), dirAPressed: a ? 'true' : 'false', dirBPressed: a ? 'false' : 'true',
+      dirAImg: layer(a, 'cover', 'top center'), dirBImg: layer(!a, 'cover', 'top center'),
+      dirA: function () { self.setState({ dir: 'a', dirAuto: false }); },
+      dirB: function () { self.setState({ dir: 'b', dirAuto: false }); }
+    };
+  }
+}
+DC.mount(Component, {});
+</script>
+</body>
+</html>

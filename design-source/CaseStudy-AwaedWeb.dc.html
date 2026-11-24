@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Case study: Awaed Web Trader</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+@media (max-width: 699px){.cs-herotile{aspect-ratio:4 / 5 !important;border-radius:20px !important}.cs-herotile > div{left:5% !important;right:5% !important;top:7% !important}}
+a{color:#0E0F11}a:hover{color:#2643E9}
+@keyframes csUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cs-up{animation:csUp .8s cubic-bezier(.2,.7,.2,1) both}
+.cs-d1{animation-delay:.1s}.cs-d2{animation-delay:.2s}
+.cs-toc{transition:color .2s ease,border-color .2s ease}
+@media (max-width: 899px){.cs-aside{display:none !important}}.cs-toc:hover{color:#0E0F11}
+.cs-next .cs-shot{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.cs-next:hover .cs-shot{transform:translateY(-8px)}
+.cs-rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.cs-rv.in{opacity:1;transform:none}
+.cs-fade{transition:opacity .9s ease}
+.cs-seg{transition:background-color .3s ease,color .3s ease}
+.cs-seg:focus-visible,.cs-pick:focus-visible{outline:2px solid #2643E9;outline-offset:2px}
+@keyframes csRise{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+.cs-rise{animation:csRise 1.2s .25s cubic-bezier(.2,.7,.2,1) both}
+@keyframes csScroll{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + 100cqh))}}
+.cs-scrollbox{container-type:size}
+.cs-scroll{animation:csScroll 26s ease-in-out infinite alternate}
+.cs-scrollbox:hover .cs-scroll{animation-play-state:paused}
+@keyframes csTick{0%,38%{opacity:0}48%,90%{opacity:1}100%{opacity:0}}
+.cs-tick{animation:csTick 6s ease-in-out infinite}
+@keyframes csPulse{0%{box-shadow:0 0 0 0 rgba(245,166,35,.55)}70%{box-shadow:0 0 0 10px rgba(245,166,35,0)}100%{box-shadow:0 0 0 0 rgba(245,166,35,0)}}
+.cs-pulse{animation:csPulse 2s ease-out infinite}
+@keyframes csFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.cs-float{animation:csFloat 7s ease-in-out infinite}
+@keyframes csKen{0%{transform:scale(1.02) translate(0,0)}100%{transform:scale(1.14) translate(-3%,-4%)}}
+.cs-ken{animation:csKen 14s ease-in-out infinite alternate}
+.cs-page{opacity:0;transform:translateX(-10px);transition:opacity .5s ease,transform .5s ease}
+.in .cs-page{opacity:1;transform:none}
+.cs-pick{transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s ease,box-shadow .8s ease}
+@media (max-width: 699px){.cs-map,.cs-file,.cs-board{aspect-ratio:auto !important;grid-template-columns:minmax(0,1fr) !important}.cs-board > div + div{padding-left:0 !important;border-left:0 !important;padding-top:16px;border-top:1px solid #E0DFD9}.cs-map .cs-scrollbox{height:340px;margin:20px 20px 0 !important}.cs-file .cs-mosaic{height:300px}}
+@media (prefers-reduced-motion: reduce){.cs-up,.cs-rise,.cs-scroll,.cs-tick,.cs-pulse,.cs-float,.cs-ken{animation:none}.cs-tick{opacity:1}.cs-next .cs-shot,.cs-rv,.cs-fade,.cs-pick,.cs-page{transition:none}.cs-rv,.cs-page{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); box-sizing: border-box">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
+<a href="Landing.dc.html" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #0E0F11"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">Nada Ibrahim</span><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Senior Product Designer</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
+<a class="cs-toc" href="Landing.dc.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">← All work</a>
+<a class="cs-toc" href="Landing.dc.html" style="font-size: 15px; color: #6B6F76; text-decoration: none">About</a>
+<a class="cs-toc" href="#" style="font-size: 15px; color: #6B6F76; text-decoration: none">Résumé</a>
+<a href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #F4F4F1; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Get in touch</a>
+</nav>
+</header>
+
+<section style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; padding: clamp(56px, 7vw, 104px) 0 clamp(40px, 5vw, 64px)">
+<p class="cs-up" style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Case study · Awaed · Web Trader MVP</p>
+<h1 class="cs-up cs-d1" style="margin: 0; max-width: 900px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(30px, 3.3vw, 46px); line-height: 1.12; font-weight: 500; letter-spacing: -0.025em">Awaed Web Trader</h1>
+<p class="cs-up cs-d2" style="margin: 0; max-width: 640px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: #4A4D52">A trading MVP for two markets and two languages, designed in three weeks. Awaed needed a web app fast, as the foundation for its future trading products.</p>
+<p class="cs-up cs-d2" style="margin: 0; font-size: 14px; color: #6B6F76">0 to 1 ∙ Design system ∙ Web ∙ Released internally</p>
+</section>
+
+<div class="cs-herotile" style="position: relative; aspect-ratio: 16 / 9; border-radius: 24px; background: #D9E4DA; overflow: hidden">
+<div class="cs-rise" style="position: absolute; left: 8%; right: 8%; top: 10%; bottom: -4%; border-radius: 14px 14px 0 0; background: #FFFFFF; box-shadow: 0 30px 80px rgba(30, 50, 34, 0.22); display: flex; flex-direction: column; overflow: hidden">
+<div style="height: 40px; flex: none; display: flex; align-items: center; gap: 6px; padding: 0 12px 0 16px; border-bottom: 1px solid #EFEEEA"><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span><span style="width: 9px; height: 9px; border-radius: 999px; background: #E4E2DC"></span>
+<div role="group" aria-label="Screen language" style="margin-left: auto; display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: #F2F1ED">
+<button class="cs-seg" type="button" onClick="{{ heroAr }}" aria-pressed="{{ heroArPressed }}" lang="ar" style="{{ heroArStyle }}">العربية</button>
+<button class="cs-seg" type="button" onClick="{{ heroEn }}" aria-pressed="{{ heroEnPressed }}" style="{{ heroEnStyle }}">English</button>
+</div>
+</div>
+<div class="cs-heroscroll" tabindex="0" role="region" aria-label="Stock detail screen, scrollable" onScroll="{{ heroScroll }}" style="position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; background: #0B0B0C">
+<div style="position: relative">
+<img class="cs-fade" src="/_blob/d10f0376840d630f0657cb701069f995" alt="Awaed Web Trader stock detail page in English, full length: TSLA chart, order ticket, position, key stats, about, analyst rating, stock split history, earnings, dividends and news" style="{{ heroEnImg }}">
+<img class="cs-fade" src="/_blob/6797ca95edbf3dd23ccfc1d83ff62d4c" alt="The same stock detail page in Arabic, right to left" style="{{ heroArImg }}">
+</div>
+</div>
+</div>
+<p aria-hidden="true" style="{{ heroHint }}">Scroll the screen ↓</p>
+</div>
+
+<dl style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; margin: 40px 0 0; border-top: 1px solid #E6E6E3">
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">My role</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Lead and only designer</dd></div>
+
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Timeline</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">3 weeks</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Platform</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Web · English + Arabic</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Status</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Released internally</dd></div>
+<div style="padding: 20px 20px 20px 0; border-bottom: 1px solid #E6E6E3"><dt style="font-size: 13px; color: #6B6F76">Outcome</dt><dd style="margin: 6px 0 0; font-size: 15px; font-weight: 500">Options trading built on it</dd></div>
+</dl>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; padding: clamp(48px, 6vw, 80px) 0">
+<div style="padding: 28px; border-radius: 20px; background: #F4F4F1; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Problem</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">No PM and no source of truth. Trading rules for two markets were scattered across multiple people, old designs, and code.</p></div>
+<div style="padding: 28px; border-radius: 20px; background: #F4F4F1; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">What I did</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Gathered the rules from PMs and developers, and documented every case in one system with market modes.</p></div>
+<div style="padding: 28px; border-radius: 20px; background: #E9EDFD; display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Result</p><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">A web MVP in three weeks. Engineering built from the file, and options trading was built on top of it.</p></div>
+</section>
+
+<div id="cs-body" style="position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 64px; padding-bottom: clamp(72px, 9vw, 128px); border-top: 1px solid #E6E6E3; padding-top: clamp(48px, 6vw, 80px); justify-content: center">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ marks }}" as="m" hint-placeholder-count="0"><span data-i="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>
+
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: clamp(120px, 12vw, 184px)">
+
+<section id="context" style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">01 · Context</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">A web trader other products could build on</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4D52">Awaed wanted a web app for advanced traders, and it had to be the foundation for a growing line of products. Options trading and an advanced web trader came first, with more on the roadmap. The goal was to build it fast. As the lead designer, I owned it end to end, and with no PM on the project, I also shaped what we built and in what order.</p>
+</section>
+
+<section id="challenge" style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">02 · The challenge</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">Two languages, two markets, and no source of truth</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4D52">On mobile, the designs existed in several versions. Trading rules were scattered with nowhere to check them: US market hours, limit prices, order volume, KSA regulations. There were no unified order summaries or order flows. Before I could design the web, someone had to work out what the rules actually were.</p>
+</div>
+<figure class="{{ rv.map }}" data-rv="map" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div class="cs-map" style="aspect-ratio: 16 / 9; border-radius: 20px; background: #161616; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch">
+<div class="cs-scrollbox" style="position: relative; overflow: hidden; margin: 28px 0 0 28px; border-radius: 12px 12px 0 0; background: #1E1E1E; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06)">
+<img class="cs-scroll" src="/_blob/a243921f7d738d25f98a8171230b98ce" alt="The trading rules page of the delivery file, zoomed out: US rules, Saudi rules, pre-trading checks and order summary rules, each case drawn as screens" style="display: block; width: 100%; height: auto">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: linear-gradient(rgba(22, 22, 22, 0), #161616)"></div>
+</div>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: clamp(20px, 3vw, 44px); color: #F4F4F1">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8C9096">One page, every rule</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: clamp(14px, 1.3vw, 17px); line-height: 1.3">
+<li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #3DDC84"></span>US rules</li>
+<li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #3DDC84"></span>Saudi rules</li>
+<li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #3DDC84"></span>Pre-trading checks</li>
+<li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #3DDC84"></span>Order summary rules</li>
+<li style="display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #3DDC84"></span>Pay Later</li>
+</ul>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #A3A7AD">English shown. The Arabic column mirrors it, rule for rule.</p>
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">The rules map from the delivery file. Hover to pause.</figcaption>
+</figure>
+</section>
+
+<section id="collaboration" style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">03 · How I worked</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">No PM, so I became the bridge</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A4D52">Without a PM, I gathered the requirements myself, from past PMs and from the developers who knew how mobile worked. I documented every case and got it confirmed by PM and development before handoff. During the build I kept a direct line open with the engineering team, documented everything in the file, and handed over a structure they were happy to build from.</p>
+</section>
+
+<section id="decisions" style="display: flex; flex-direction: column; gap: clamp(88px, 9vw, 128px)">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">04 · Key decisions</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">How I turned scattered rules into a system</h2>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 01</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">What was live on mobile came first</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">I prioritised the roadmap by what was already released on mobile. Those features went into the web MVP; anything still in development on mobile waited for the next phase. That let me put quality first without falling short on the scope the MVP needed.</p>
+</div>
+<figure class="{{ rv.file }}" data-rv="file" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div class="cs-board" style="border-radius: 20px; background: #F4F4F1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 32px); padding: clamp(20px, 3vw, 40px); box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1E7A43">Web MVP · live on mobile</p>
+<p style="margin: 0; font-size: 13px; color: #6B6F76">7 features · 3 weeks</p>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px">
+<li class="cs-page" style="transition-delay: 0.00s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Login</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.06s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Account activation</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.12s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Overview</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.18s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Stock details</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.24s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Trading rules</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.30s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>My portfolio</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+<li class="cs-page" style="transition-delay: 0.36s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 0 rgba(14, 15, 17, 0.04), 0 6px 18px rgba(14, 15, 17, 0.05); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #0E0F11"><span>Take profit order</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; background: #1E9E52"></span></li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding-left: clamp(16px, 2.4vw, 32px); border-left: 1px solid #E0DFD9">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Next phase</p>
+<p style="margin: 0; font-size: 13px; color: #6B6F76">Still in development on mobile</p>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px">
+<li class="cs-page" style="transition-delay: 0.50s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #C9C8C2; font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #6B6F76"><span>Fundamental analysis</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; border: 1.5px solid #A3A7AD; box-sizing: border-box"></span></li>
+<li class="cs-page" style="transition-delay: 0.56s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #C9C8C2; font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #6B6F76"><span>Short selling</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; border: 1.5px solid #A3A7AD; box-sizing: border-box"></span></li>
+<li class="cs-page" style="transition-delay: 0.62s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #C9C8C2; font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #6B6F76"><span>Market depth</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; border: 1.5px solid #A3A7AD; box-sizing: border-box"></span></li>
+<li class="cs-page" style="transition-delay: 0.68s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #C9C8C2; font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #6B6F76"><span>Price alert</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; border: 1.5px solid #A3A7AD; box-sizing: border-box"></span></li>
+<li class="cs-page" style="transition-delay: 0.74s; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #C9C8C2; font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: #6B6F76"><span>Options trading</span><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 999px; border: 1.5px solid #A3A7AD; box-sizing: border-box"></span></li>
+</ul>
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">The rule I used to scope the MVP: if it was live on mobile, it came to web first. Everything else waited for the next phase.</figcaption>
+</figure>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 02</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">Every rule designed as a real state</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">I went to the PMs who had worked on these features before, and to the developers who built mobile, to see how each rule was really implemented. Then I designed every case as a state in the system, in English and Arabic, all built from components. PM and engineering confirmed it, and engineering built the web from that file.</p>
+</div>
+<div class="{{ rv.rules }}" data-rv="rules" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; aspect-ratio: 4 / 5; border-radius: 20px; background: #F4F4F1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 9% 12%; box-sizing: border-box">
+<p style="position: absolute; top: 16px; left: 16px; margin: 0; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px; font-weight: 600; color: #0E0F11"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: #1E9E52"></span>Saudi rule</p>
+<div style="position: relative; width: 100%; height: 100%">
+<img src="/_blob/7cfe8eed496e5e2f8da325a4feb30027" alt="Saudi order ticket with a limit price typed in" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.22))">
+<img class="cs-tick" src="/_blob/91656c5803827e0fef89973ecf22fbb1" alt="The same ticket after the price snaps to the tick size, with the message: value auto-adjusted to 9.7" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.22))">
+</div>
+</div>
+<figcaption style="font-size: 13px; line-height: 1.5; color: #6B6F76">Saudi · the limit price snaps to the tick size, and the ticket says why.</figcaption>
+</figure>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; aspect-ratio: 4 / 5; border-radius: 20px; background: #F4F4F1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 9% 12%; box-sizing: border-box">
+<p style="position: absolute; top: 16px; left: 16px; margin: 0; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; font-size: 12px; font-weight: 600; color: #0E0F11"><span class="cs-pulse" aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: #F5A623"></span>US rule · wash sale</p>
+<img class="cs-float" src="/_blob/129f5581aaaa6caf77e74e50399f9fa0" alt="US buy ticket with a warning: you have pending sell orders, so you cannot place a buy order on this stock until they execute or are cancelled" style="display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.22))">
+</div>
+<figcaption style="font-size: 13px; line-height: 1.5; color: #6B6F76">US · with sell orders still pending, the buy ticket blocks the order and says what to do next.</figcaption>
+</figure>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 680px; padding-left: 16px; border-left: 2px solid #2643E9">
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #2643E9">Decision 03</p>
+<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em">One set of tokens, switched by market</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4D52">Saudi and US trade differently: tick sizes and fluctuation limits on one side, penny-stock and pre-market rules on the other. Market modes let one screen carry both.</p>
+</div>
+<figure class="{{ rv.modes }}" data-rv="modes" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 16 / 10; border-radius: 20px; background: #E9EDFD; overflow: hidden; display: flex; flex-direction: column; padding: clamp(16px, 2.4vw, 32px) clamp(16px, 2.4vw, 32px) 0; box-sizing: border-box; gap: clamp(12px, 1.6vw, 20px)">
+<div role="group" aria-label="Market mode" style="align-self: center; display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 4px 16px rgba(38, 67, 233, 0.08)">
+<button class="cs-seg" type="button" onClick="{{ modeUs }}" aria-pressed="{{ modeUsPressed }}" style="{{ modeUsStyle }}">US market</button>
+<button class="cs-seg" type="button" onClick="{{ modeSa }}" aria-pressed="{{ modeSaPressed }}" style="{{ modeSaStyle }}">Saudi market</button>
+</div>
+<div style="position: relative; flex: 1; min-height: 0; width: 100%; max-width: 980px; align-self: center; border-radius: 12px 12px 0 0; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(38, 67, 233, 0.2)">
+<img class="cs-fade" src="/_blob/76c6310e22d7d9c05e2fcb6d05c72d77" alt="Awaed home page in US market mode: market summary with top gainers and losers, your positions and watchlist" style="{{ usImg }}">
+<img class="cs-fade" src="/_blob/d4beb1112eac04a308bf53ad2ed2fc5a" alt="The same home page in Saudi market mode" style="{{ saImg }}">
+</div>
+</div>
+<figcaption style="font-size: 13px; color: #6B6F76">The home page in both markets. One switch at the top changes the market, and the same layout carries both.</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="impact" style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 680px">
+<p style="margin: 0; font-size: 13px; font-weight: 500; color: #6B6F76">05 · Impact</p>
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">The web shipped, and became the base for options</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+<div style="padding: 24px; border-radius: 20px; border: 1px solid #E6E6E3; display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 38px; line-height: 1; font-weight: 500; letter-spacing: -0.025em">3 weeks</p><p style="margin: 0; font-size: 15px; font-weight: 500">Brief to MVP</p><p style="margin: 0; font-size: 13px; color: #6B6F76">Designed end to end, lead and only designer</p></div>
+<div style="padding: 24px; border-radius: 20px; border: 1px solid #E6E6E3; display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 38px; line-height: 1; font-weight: 500; letter-spacing: -0.025em">17</p><p style="margin: 0; font-size: 15px; font-weight: 500">Rule groups documented in one place</p><p style="margin: 0; font-size: 13px; color: #6B6F76">US, Saudi, pre-trading checks, Pay Later</p></div>
+<div style="padding: 24px; border-radius: 20px; border: 1px solid #E6E6E3; display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 38px; line-height: 1; font-weight: 500; letter-spacing: -0.025em">2</p><p style="margin: 0; font-size: 15px; font-weight: 500">Languages, every rule state in both</p><p style="margin: 0; font-size: 13px; color: #6B6F76">English and Arabic, built from components</p></div>
+</div>
+
+</section>
+
+
+</div>
+
+<aside class="cs-aside" aria-label="On this page" style="flex: 1 1 200px; min-width: 0; max-width: 240px; align-self: flex-start">
+<nav id="cs-toc-nav" style="display: flex; flex-direction: column; gap: 2px; will-change: transform; justify-content: flex-start; align-items: flex-start">
+<p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">On this page</p>
+<sc-for list="{{ toc }}" as="item" hint-placeholder-count="6">
+<a class="cs-toc" href="{{ item.href }}" onClick="{{ item.go }}" aria-current="{{ item.current }}" style="{{ item.style }}">{{ item.label }}</a>
+</sc-for>
+</nav>
+</aside>
+
+</div>
+
+<div class="{{ rv.closing }}" data-rv="closing" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 20px; background: #D9E4DA; overflow: hidden">
+<div class="cs-float" style="position: absolute; left: 9%; right: 9%; top: 11%; bottom: -6%; border-radius: 12px 12px 0 0; overflow: hidden; background: #000000; box-shadow: 0 24px 60px rgba(30, 50, 34, 0.25)"><img src="/_blob/6b77d9c22ff9f313e7b77d0c7c6f0e47" alt="My Portfolio screen: available to trade, total investments ring split across stocks, funds and murabaha, and holdings by US and Saudi market" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: top"></div>
+</div>
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 20px; background: #0B0B0C; overflow: hidden">
+<img class="cs-ken" src="/_blob/7a05d3cd86bf0dd50210dfe744a8cc9b" alt="Close-up of the order ticket with the market closed status above it" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transform-origin: 50% 30%">
+</div>
+</div>
+
+
+<section id="contact" style="margin: clamp(72px, 9vw, 128px) 0 32px; padding: clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px); border-radius: 28px; background: #F4F4F1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px">
+<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.12; font-weight: 500; letter-spacing: -0.02em">Got an unclear brief? <span style="color: #6B6F76">Let’s talk.</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="mailto:nada.i.mahmoud25@gmail.com" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Email me</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #D6D6D2; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">LinkedIn</a>
+</div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":8200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { active: 'context', lang: 'en', mode: 'us', rv: {}, heroAuto: false, modeAuto: true, scrolled: false };
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this.n = 2000;
+    this.vis = {};
+    this.sections = [
+      { id: 'context', label: 'Context' },
+      { id: 'challenge', label: 'The challenge' },
+      { id: 'collaboration', label: 'How I worked' },
+      { id: 'decisions', label: 'Key decisions' },
+      { id: 'impact', label: 'Impact' }
+    ];
+    this.measure = this.measure.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.measure);
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    this.observe();
+    this.later = setTimeout(this.measure, 600);
+    this.reveal();
+    var self = this;
+    if (!this.reduce) {
+      this.tick = setInterval(function () {
+        var next = {};
+        if (self.state.heroAuto) next.lang = self.state.lang === 'en' ? 'ar' : 'en';
+        if (self.state.modeAuto) next.mode = self.state.mode === 'us' ? 'sa' : 'us';
+        if (next.lang || next.mode) self.setState(next);
+      }, 4200);
+    }
+  }
+  reveal() {
+    var self = this;
+    var els = document.querySelectorAll('[data-rv]');
+    if (typeof IntersectionObserver === 'undefined' || this.reduce) {
+      var all = {};
+      for (var i = 0; i < els.length; i++) all[els[i].getAttribute('data-rv')] = 1;
+      this.setState({ rv: all });
+      return;
+    }
+    this.rvio = new IntersectionObserver(function (entries) {
+      var add = {}; var any = false;
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { add[e.target.getAttribute('data-rv')] = 1; any = true; self.rvio.unobserve(e.target); }
+      });
+      if (any) self.setState({ rv: Object.assign({}, self.state.rv, add) });
+    }, { threshold: 0.15 });
+    for (var j = 0; j < els.length; j++) this.rvio.observe(els[j]);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.measure);
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    clearTimeout(this.later);
+    clearInterval(this.tick);
+    if (this.io) this.io.disconnect();
+    if (this.rvio) this.rvio.disconnect();
+  }
+  measure() {
+    var body = document.getElementById('cs-body');
+    if (!body) return;
+    this.observe();
+  }
+  observe() {
+    var body = document.getElementById('cs-body');
+    if (!body || typeof IntersectionObserver === 'undefined') return;
+    if (this.io) this.io.disconnect();
+    var self = this;
+    this.vis = {};
+    this.io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = Number(e.target.getAttribute('data-i'));
+        if (e.isIntersecting) self.vis[i] = 1; else delete self.vis[i];
+      });
+      var keys = Object.keys(self.vis).map(Number);
+      if (!keys.length) return;
+      var lo = keys[0], hi = keys[0];
+      for (var k = 1; k < keys.length; k++) { if (keys[k] < lo) lo = keys[k]; if (keys[k] > hi) hi = keys[k]; }
+      var h = body.offsetHeight;
+      self.apply(lo / (self.n - 1) * h, hi / (self.n - 1) * h);
+    });
+    var marks = body.querySelectorAll('[data-i]');
+    for (var m = 0; m < marks.length; m++) this.io.observe(marks[m]);
+  }
+  onScroll() {
+    var body = document.getElementById('cs-body');
+    if (!body) return;
+    var r = body.getBoundingClientRect();
+    var vh = window.innerHeight;
+    if (r.height <= vh + 2) return;
+    this.apply(Math.max(0, -r.top), Math.min(r.height, vh - r.top));
+  }
+  apply(top, bottom) {
+    var body = document.getElementById('cs-body');
+    var nav = document.getElementById('cs-toc-nav');
+    if (!body || !nav) return;
+    var aside = nav.parentNode;
+    var br = body.getBoundingClientRect();
+    var asideTop = aside.getBoundingClientRect().top - br.top;
+    var rowH = body.offsetHeight;
+    var offset = 0;
+    if (window.innerWidth >= 900) {
+      var max = rowH - asideTop - nav.offsetHeight - 48;
+      offset = Math.max(0, Math.min(top + 32 - asideTop, max));
+    }
+    nav.style.transform = offset > 0 ? 'translateY(' + Math.round(offset) + 'px)' : '';
+    var line = top + (bottom - top) * 0.3;
+    var current = this.sections[0].id;
+    for (var i = 0; i < this.sections.length; i++) {
+      var el = document.getElementById(this.sections[i].id);
+      if (el && el.getBoundingClientRect().top - br.top <= line) current = this.sections[i].id;
+    }
+    if (this.lockUntil && Date.now() < this.lockUntil) return;
+    if (current !== this.state.active) this.setState({ active: current });
+  }
+  renderVals() {
+    var self = this;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var marks = [];
+    for (var i = 0; i < this.n; i++) marks.push({ i: i, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / (this.n - 1) * 100).toFixed(3) + '%' });
+    var toc = this.sections.map(function (s) {
+      var on = s.id === self.state.active;
+      return {
+        href: '#' + s.id,
+        label: s.label,
+        current: on ? 'location' : 'false',
+        style: 'display: block; padding: 6px 0 6px 14px; border-left: 2px solid ' + (on ? '#0E0F11' : '#E6E6E3') + '; font-size: 14px; font-weight: ' + (on ? '500' : '400') + '; color: ' + (on ? '#0E0F11' : '#6B6F76') + '; text-decoration: none',
+        go: function (e) {
+          var el = document.getElementById(s.id);
+          if (!el) return;
+          if (e && e.preventDefault) e.preventDefault();
+          el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          self.lockUntil = Date.now() + 1200;
+          self.setState({ active: s.id });
+        }
+      };
+    });
+    var st = this.state;
+    var seg = function (on) {
+      return 'min-height: 28px; padding: 0 12px; border: 0; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 600; background: ' + (on ? '#0E0F11' : 'transparent') + '; color: ' + (on ? '#FFFFFF' : '#4A4D52');
+    };
+    var img = function (on, first) {
+      return (first ? 'position: relative' : 'position: absolute; top: 0; left: 0') + '; display: block; width: 100%; height: auto; opacity: ' + (on ? '1' : '0') + '; pointer-events: none';
+    };
+    var card = function (on) {
+      return 'border-radius: 12px 12px 0 0; overflow: hidden; background: #000000; transform-origin: 50% 100%; transform: ' + (on ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.97)') + '; opacity: ' + (on ? '1' : '0.55') + '; box-shadow: ' + (on ? '0 24px 60px rgba(38, 67, 233, 0.22)' : '0 8px 24px rgba(14, 15, 17, 0.08)');
+    };
+    var en = st.lang === 'en', us = st.mode === 'us';
+    var rv = {};
+    ['map', 'modes', 'rules', 'file', 'closing'].forEach(function (k) { rv[k] = 'cs-rv' + (st.rv[k] ? ' in' : ''); });
+    return {
+      toc: toc, marks: marks, rv: rv,
+      heroEnStyle: seg(en), heroArStyle: seg(!en),
+      heroEnPressed: en ? 'true' : 'false', heroArPressed: en ? 'false' : 'true',
+      heroEnImg: img(en, true), heroArImg: img(!en, false),
+      heroHint: 'position: absolute; right: 3%; bottom: 4%; margin: 0; padding: 8px 14px; border-radius: 999px; background: rgba(14, 15, 17, 0.78); color: #FFFFFF; font-size: 12px; font-weight: 600; pointer-events: none; transition: opacity .5s ease; opacity: ' + (st.scrolled ? '0' : '1'),
+      heroScroll: function (e) { var t = e && e.currentTarget ? e.currentTarget : null; if (!self.state.scrolled && (!t || t.scrollTop > 8)) self.setState({ scrolled: true, heroAuto: false }); },
+      heroEn: function () { self.setState({ lang: 'en', heroAuto: false }); },
+      heroAr: function () { self.setState({ lang: 'ar', heroAuto: false }); },
+      modeUsStyle: seg(us), modeSaStyle: seg(!us),
+      modeUsPressed: us ? 'true' : 'false', modeSaPressed: us ? 'false' : 'true',
+      usImg: img(us, true), saImg: img(!us, false),
+      modeUs: function () { self.setState({ mode: 'us', modeAuto: false }); },
+      modeSa: function () { self.setState({ mode: 'sa', modeAuto: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
