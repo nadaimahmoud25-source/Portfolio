@@ -11,6 +11,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
+/* artboard page transition: zoom out to the canvas, pan to the next page, zoom in */
+@view-transition{navigation:auto}
+@keyframes nd-out{0%{transform:none;border-radius:0;animation-timing-function:cubic-bezier(.65,0,.35,1)}36%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%,100%{transform:translateX(-50vw) scale(.44);border-radius:34px}}
+@keyframes nd-in{0%{transform:translateX(50vw) scale(.44);border-radius:34px;opacity:0}20%{opacity:0}36%{transform:translateX(50vw) scale(.44);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:none;border-radius:0;opacity:1}}
+@media (prefers-reduced-motion: no-preference){
+::view-transition{background:radial-gradient(circle,#C7C7C2 1px,transparent 1.3px) 0 0 / 22px 22px #E9E9E6}
+::view-transition-group(root){animation-duration:1.46s}
+::view-transition-image-pair(root){isolation:auto}
+::view-transition-old(root),::view-transition-new(root){overflow:hidden;box-shadow:0 60px 140px -40px rgba(0,0,0,.28),0 0 0 1px rgba(0,0,0,.06);animation-duration:1.46s;animation-delay:0s;animation-fill-mode:both;animation-timing-function:linear;mix-blend-mode:normal}
+::view-transition-old(root){animation-name:nd-out}
+::view-transition-new(root){animation-name:nd-in}
+}
+@keyframes nd-out-back{0%{transform:none;border-radius:0;animation-timing-function:cubic-bezier(.65,0,.35,1)}36%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%,100%{transform:translateX(50vw) scale(.44);border-radius:34px}}
+@keyframes nd-in-back{0%{transform:translateX(-50vw) scale(.44);border-radius:34px;opacity:0}20%{opacity:0}36%{transform:translateX(-50vw) scale(.44);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:none;border-radius:0;opacity:1}}
+@media (prefers-reduced-motion: no-preference){
+html:active-view-transition-type(back)::view-transition-old(root){animation-name:nd-out-back}
+html:active-view-transition-type(back)::view-transition-new(root){animation-name:nd-in-back}
+}
+@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}
+
 body{margin:0;background:#FFFFFF}
 #pg-nav{position:relative;z-index:50;transition:padding .25s ease,box-shadow .25s ease;will-change:transform}
 #pg-nav[data-pinned="1"]{padding:14px 0 !important;background:rgba(255,255,255,.94);box-shadow:0 0 0 100vmax rgba(255,255,255,.94),0 1px 0 100vmax #E6E6E3;clip-path:inset(0 -100vmax -1px -100vmax);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
@@ -41,6 +61,20 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 @media (max-width: 699px){.cs-steps{grid-template-columns:repeat(5,minmax(0,1fr)) !important}.cs-steps .cs-steplabel{display:none}}
 @media (prefers-reduced-motion: reduce){.cs-up,.cs-rise,.cs-float,.cs-float2,.cs-float3,.cs-bar{animation:none}.cs-next .cs-shot,.cs-rv,.cs-fade,.cs-seg{transition:none}.cs-rv{opacity:1;transform:none}}
 </style>
+<script>
+/* Direction of the page transition: going to the home page plays it backwards. */
+(function () {
+  function isHome(u) {
+    try { var f = new URL(u, location.href).pathname.split('/').pop(); return f === '' || /^(index|home)\.html$/.test(f) || /^(Landing|Home-v2)\.dc\.html$/.test(f); } catch (e) { return false; }
+  }
+  addEventListener('pageswap', function (e) {
+    if (e.viewTransition && e.activation && e.activation.entry) e.viewTransition.types.add(isHome(e.activation.entry.url) ? 'back' : 'forward');
+  });
+  addEventListener('pagereveal', function (e) {
+    if (e.viewTransition) e.viewTransition.types.add(isHome(location.href) ? 'back' : 'forward');
+  });
+})();
+</script>
 </helmet>
 <div id="pg-root" style="position: relative; background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
 <div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ pmarks }}" as="m" hint-placeholder-count="0"><span data-p="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>

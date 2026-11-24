@@ -7,50 +7,246 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
+/* artboard page transition: zoom out to the canvas, pan to the next page, zoom in */
+@view-transition{navigation:auto}
+@keyframes nd-out{0%{transform:none;border-radius:0;animation-timing-function:cubic-bezier(.65,0,.35,1)}36%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%,100%{transform:translateX(-50vw) scale(.44);border-radius:34px}}
+@keyframes nd-in{0%{transform:translateX(50vw) scale(.44);border-radius:34px;opacity:0}20%{opacity:0}36%{transform:translateX(50vw) scale(.44);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:none;border-radius:0;opacity:1}}
+@media (prefers-reduced-motion: no-preference){
+::view-transition{background:radial-gradient(circle,#C7C7C2 1px,transparent 1.3px) 0 0 / 22px 22px #E9E9E6}
+::view-transition-group(root){animation-duration:1.46s}
+::view-transition-image-pair(root){isolation:auto}
+::view-transition-old(root),::view-transition-new(root){overflow:hidden;box-shadow:0 60px 140px -40px rgba(0,0,0,.28),0 0 0 1px rgba(0,0,0,.06);animation-duration:1.46s;animation-delay:0s;animation-fill-mode:both;animation-timing-function:linear;mix-blend-mode:normal}
+::view-transition-old(root){animation-name:nd-out}
+::view-transition-new(root){animation-name:nd-in}
+}
+@keyframes nd-out-back{0%{transform:none;border-radius:0;animation-timing-function:cubic-bezier(.65,0,.35,1)}36%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%,100%{transform:translateX(50vw) scale(.44);border-radius:34px}}
+@keyframes nd-in-back{0%{transform:translateX(-50vw) scale(.44);border-radius:34px;opacity:0}20%{opacity:0}36%{transform:translateX(-50vw) scale(.44);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}64%{transform:scale(.44);border-radius:34px;animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:none;border-radius:0;opacity:1}}
+@media (prefers-reduced-motion: no-preference){
+html:active-view-transition-type(back)::view-transition-old(root){animation-name:nd-out-back}
+html:active-view-transition-type(back)::view-transition-new(root){animation-name:nd-in-back}
+}
+@media (prefers-reduced-motion: reduce){@view-transition{navigation:none}}
+
 body{margin:0;background:#FFFFFF}
-#pg-nav{position:relative;z-index:50;transition:padding .25s ease,box-shadow .25s ease;will-change:transform}
-#pg-nav[data-pinned="1"]{padding:14px 0 !important;background:rgba(255,255,255,.94);box-shadow:0 0 0 100vmax rgba(255,255,255,.94),0 1px 0 100vmax #E6E6E3;clip-path:inset(0 -100vmax -1px -100vmax);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
-.ttl{width:fit-content}
-@media (max-width: 699px){.nav-spacer{display:none !important}}
-a{color:#0E0F11}a:hover{color:#4A4D52}
-.navlink{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .35s cubic-bezier(.2,.7,.2,1),color .2s ease}
-.navlink:hover{color:#0E0F11;background-size:100% 1px}
-.btn{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,background-color .25s ease}
-.btn svg{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(14,15,17,.12)}
-.btn:hover svg{translate:2px -2px}
-.btn[href="#work"]:hover svg,.btn[download]:hover svg{translate:0 3px}
-.tile{transition:background-color .5s ease}
-a.card .tile{overflow:visible !important}
-.card .shot{transform-origin:50% 100%;transition:translate .45s cubic-bezier(.4,0,.2,1),scale .45s cubic-bezier(.4,0,.2,1),box-shadow .45s ease,filter .5s ease}
-.card .shot.full{position:absolute;left:50%;top:50%;width:64%;height:auto;aspect-ratio:1.407;translate:-50% -50%;transform-origin:50% 50%;border-radius:10px;overflow:hidden;box-shadow:0 14px 40px rgba(14,15,17,.14);transition:scale 1.2s cubic-bezier(.45,0,.2,1),box-shadow 1.2s cubic-bezier(.45,0,.2,1)}
-.card .shot.full img{display:block;width:100%;height:100%;object-fit:contain}
-.card .float{transition:translate .8s cubic-bezier(.22,1,.36,1),scale .8s cubic-bezier(.22,1,.36,1),opacity .6s ease}
-.card .num{z-index:3;transition:color .3s ease,letter-spacing .3s ease}
-.ttl{background-image:linear-gradient(currentColor,currentColor);background-size:0% 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .5s cubic-bezier(.2,.7,.2,1)}
-.cta{opacity:0;transform:translateX(-8px);transition:opacity .3s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
-.cta .arr{display:inline-block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-a.card:hover .tile{background-color:var(--tint) !important}
-a.card:hover .shot.full{scale:1.22;box-shadow:0 40px 80px rgba(14,15,17,.26)}
-a.card:hover .float{scale:1.06;transition:translate .9s cubic-bezier(.22,1,.36,1) .15s,scale .9s cubic-bezier(.22,1,.36,1) .15s}
-a.card:hover .float:nth-of-type(1){translate:14px -16px}
-a.card:hover .float:nth-of-type(2){translate:16px 12px;transition-delay:.25s}
-a.card:hover .num{color:#2643E9 !important;letter-spacing:.06em}
-a.card:hover .ttl{background-size:100% 2px;transition-delay:.2s}
-a.card:hover .cta{opacity:1;transform:none;transition-delay:.3s}
-a.card:hover .cta .arr{transform:translateX(4px)}
-a.card:focus-visible{outline:2px solid #2643E9;outline-offset:8px;border-radius:12px}
-a.card:focus-visible .cta{opacity:1;transform:none}
-@keyframes wiggle{0%,100%{translate:0 0}25%{translate:0 -4px}50%{translate:0 0}75%{translate:0 -2px}}
-.soon:hover .shot > img{filter:blur(1px) !important}
-.soon:hover .shot.skel{filter:blur(2px) !important}
-.soon:hover .shot{transform:translateY(-6px)}
-.soon:hover .float{animation:wiggle .6s ease}
-.xrow{transition:background-color .3s ease,padding .3s cubic-bezier(.2,.7,.2,1);border-radius:4px}
-.xrow:hover{background-color:#F7F7F5;padding-left:12px !important;padding-right:12px !important}
-@media (hover: none){.cta{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){.card .shot,.card .float,.btn,.btn svg,.tile,.cta,.cta .arr,.ttl,.navlink,.xrow,.card .num{transition:none}.soon:hover .float{animation:none}a.card:hover .shot:not(.full),.soon:hover .shot,a.card:hover .float{translate:none;scale:none}a.card:hover .shot.full{translate:-50% -50%;scale:none}}
+.h2-page{--ink:#0E0F11;--grey:#6B6F76;--soft:#4A4D52;--line:#F1F1EF;--head:'Helvetica Neue',Helvetica,Arial,sans-serif}
+.h2-page{overflow-x:clip}
+.h2-wrap{position:relative;max-width:1440px;margin:0 auto;padding:0 clamp(16px,2.4vw,32px);box-sizing:border-box}
+.h2-cols{position:absolute;inset:0 clamp(16px,2.4vw,32px);display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none;z-index:0}
+.h2-cols span{border-left:1px solid var(--line)}.h2-cols span:last-child{border-right:1px solid var(--line)}
+.h2-wrap > *:not(.h2-cols){position:relative;z-index:1}
+
+.h2-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:22px 0}
+.h2-mark{font-family:var(--head);font-size:21px;font-weight:500;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.h2-where{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--ink);letter-spacing:.02em;text-transform:uppercase}
+.h2-where i{width:1px;height:18px;background:var(--ink);opacity:.8}
+.h2-where .t{font-variant-numeric:tabular-nums}
+.h2-burger{justify-self:end;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:7px;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer}
+.h2-burger span{display:block;height:1.5px;background:var(--ink);border-radius:2px;transition:width .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1)}
+.h2-burger span:first-child{width:26px}.h2-burger span:last-child{width:18px}
+.h2-burger:hover span:last-child{width:26px}
+.h2-burger[aria-expanded="true"] span:first-child{transform:translateY(4.25px) rotate(45deg)}
+.h2-burger[aria-expanded="true"] span:last-child{width:26px;transform:translateY(-4.25px) rotate(-45deg)}
+.h2-menu{position:absolute;right:0;top:76px;z-index:20;display:flex;flex-direction:column;min-width:220px;padding:8px;border-radius:14px;background:#FFFFFF;box-shadow:0 20px 50px rgba(14,15,17,.14),0 0 0 1px rgba(14,15,17,.06);transform-origin:top right;transition:opacity .3s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+.h2-menu a{padding:12px 14px;border-radius:9px;font-size:15px;color:var(--ink);text-decoration:none}
+.h2-menu a:hover{background:#F4F4F2}
+
+.h2-hero{display:flex;flex-direction:column;align-items:flex-start;gap:28px;padding:clamp(40px,6vw,72px) 0 clamp(32px,4vw,48px)}
+.h2-photo{width:90px;height:90px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#E9E4DC,#CFC8BD);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:26px;font-weight:500;color:#5A554D}
+.h2-h1{margin:0;font-family:var(--head);font-size:clamp(38px,4.6vw,60px);line-height:1.06;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.h2-h1 span{display:block}
+.h2-lede{margin:0;max-width:500px;font-size:16px;line-height:1.6;color:var(--soft)}
+.h2-btn{display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0 8px 0 18px;border-radius:8px;background:var(--ink);color:#FFFFFF;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background-color .3s ease}
+.h2-btn b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:5px;background:#FFFFFF;color:var(--ink);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.h2-btn:hover{background:#26282C}.h2-btn:hover b{transform:translateX(3px)}
+
+.h2-rise{opacity:0;transform:translateY(18px);animation:h2Rise .9s cubic-bezier(.22,1,.36,1) forwards}
+.h2-d1{animation-delay:.08s}.h2-d2{animation-delay:.16s}.h2-d3{animation-delay:.24s}.h2-d4{animation-delay:.34s}
+@keyframes h2Rise{to{opacity:1;transform:none}}
+
+.h2-banner{padding:3px;border-radius:16px;background:linear-gradient(90deg,#3DDC84,#C8E05A 35%,#F2B33D 65%,#F2694B)}
+.h2-scene{position:relative;aspect-ratio:16 / 8.4;border-radius:13px;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#3A3B3E 0%,#1C1D1F 55%,#121314 100%)}
+.h2-grain{position:absolute;inset:0;opacity:.55;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.h2-slab{position:absolute;left:-6%;right:22%;bottom:-18%;height:48%;border-radius:28px;background:linear-gradient(180deg,#5B5D61,#3A3C3F);transform:rotate(-4deg);box-shadow:0 -30px 80px rgba(0,0,0,.35) inset}
+.h2-glow{position:absolute;width:46%;aspect-ratio:1;left:32%;top:6%;border-radius:50%;background:radial-gradient(circle,rgba(61,220,132,.20),rgba(61,220,132,0) 65%)}
+
+
+/* hero snapshots */
+.h2-herogrid{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:32px 48px;padding:clamp(40px,6vw,72px) 0 clamp(32px,4vw,48px)}
+.h2-herogrid .h2-hero{padding:0}
+.h2-snaps{width:clamp(280px,30vw,440px);padding:3px;border-radius:14px;background:linear-gradient(90deg,#3DDC84,#C8E05A 35%,#F2B33D 65%,#F2694B)}
+.h2-sbox{position:relative;aspect-ratio:16 / 9.4;border-radius:11px;overflow:hidden;background:#141516}
+.snap{position:absolute;inset:0;opacity:0;animation:h2Snap 10s infinite}
+.snap:nth-child(2){animation-delay:2.5s}.snap:nth-child(3){animation-delay:5s}.snap:nth-child(4){animation-delay:7.5s}
+.h2-snaps:hover .snap{animation-play-state:paused}
+@keyframes h2Snap{0%{opacity:0;scale:1.05}4%{opacity:1}25%{opacity:1;scale:1}29%{opacity:0;scale:1}100%{opacity:0}}
+.snap .dev-phone{padding:3px}
+.snap .dev-phone::after,.snap .dev-phone .vol{display:none}
+.snap.sc-dark .dev-lap{left:10%;width:60%;top:14%}.snap.sc-dark .dev-phone{left:67%;width:19%;top:12%;rotate:7deg}
+.snap.sc-web .dev-lap{left:14%;width:72%;top:16%}
+.snap.sc-opt .dev-phone.p1{left:27%;width:21%;top:14%;rotate:-8deg}.snap.sc-opt .dev-phone.p2{left:53%;width:21%;top:20%;rotate:7deg}
+.sc-short2{background:linear-gradient(180deg,#5D7EC4 0%,#8FAEE0 70%,#B9CDEE 100%)}
+.snap.sc-short2 .dev-lap{left:16%;width:68%;top:16%}
+.snap .dev-lap .base{height:6px}
+.snap .dev-lap .scr{border-radius:7px 7px 2px 2px}
+
+/* devices */
+.dev-lap{position:absolute}
+.dev-lap .scr{position:relative;padding:1.7% 1.7% 2.6%;border-radius:14px 14px 4px 4px;background:#0B0B0C;box-shadow:0 0 0 1.5px #3B3C3F inset,0 40px 80px rgba(0,0,0,.45)}
+.dev-lap .scr img{display:block;width:100%;height:auto;aspect-ratio:1.407;object-fit:cover;object-position:top center;border-radius:4px}
+.dev-lap .base{position:relative;margin:0 -9%;height:clamp(8px,1.1vw,16px);border-radius:2px 2px 14px 14px;background:linear-gradient(180deg,#D9DADC,#9C9EA2 70%,#7C7E82);box-shadow:0 18px 30px rgba(0,0,0,.35)}
+.dev-lap .base::after{content:"";position:absolute;left:42%;right:42%;top:0;height:38%;border-radius:0 0 8px 8px;background:#A9ABAE}
+.dev-phone{position:absolute;padding:clamp(4px,.45vw,7px);border-radius:17% / 7.8%;background:#050506;box-shadow:0 0 0 1.5px #A7A9AE,0 0 0 3px #6E7075,0 0 0 3.5px #2A2B2E,0 30px 70px rgba(0,0,0,.45)}
+.dev-phone img,.dev-phone .skel-scr{display:block;width:100%;height:auto;aspect-ratio:.461;object-fit:cover;object-position:top center;border-radius:15% / 7%}
+.dev-phone::before{content:"";position:absolute;left:35%;right:35%;top:3.3%;height:3.4%;border-radius:99px;background:#050506;z-index:2}
+.dev-phone::after{content:"";position:absolute;right:-4.5px;top:27%;width:2.5px;height:12%;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#6E7075,#A7A9AE)}
+.dev-phone .vol{position:absolute;left:-4.5px;width:2.5px;border-radius:2px 0 0 2px;background:linear-gradient(270deg,#6E7075,#A7A9AE)}
+.dev-phone .vol.a{top:19%;height:4%}.dev-phone .vol.b{top:26%;height:7.5%}.dev-phone .vol.c{top:35.5%;height:7.5%}
+
+.h2-scene .dev-lap{left:12%;width:56%;top:13%;animation:h2Float 9s ease-in-out infinite}
+.h2-scene .dev-phone{left:66%;width:17%;top:12%;rotate:7deg;padding:clamp(5px,.65vw,10px);animation:h2Float 9s ease-in-out -4.5s infinite}
+@keyframes h2Float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+
+/* work */
+.h2-work{padding:clamp(72px,9vw,120px) 0 clamp(72px,9vw,120px)}
+.h2-whead{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:16px;margin-bottom:36px}
+.h2-whead .n{margin:0 0 10px;font-size:15px;color:var(--ink)}
+.h2-whead h2{margin:0;font-family:var(--head);font-size:clamp(34px,4vw,52px);line-height:1;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.h2-whead .yrs{margin:0 0 6px;font-size:15px;font-weight:600;color:var(--ink)}
+.h2-whead .all{justify-self:end;margin-bottom:4px;padding-bottom:8px;border-bottom:1px solid var(--ink);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.h2-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 16px}
+.h2-card{display:flex;flex-direction:column;gap:14px;color:var(--ink);text-decoration:none}
+.h2-tile{position:relative;aspect-ratio:1.48;border-radius:12px;overflow:hidden}
+.h2-stage{position:absolute;inset:0;transform-origin:50% 55%;transition:scale 1.2s cubic-bezier(.45,0,.2,1)}
+a.h2-card:hover .h2-stage{scale:1.06}
+.h2-cap{display:flex;justify-content:space-between;gap:16px;font-size:15px}
+.h2-cap span:last-child{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#8A8D93}
+.h2-cap .ttl{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .6s cubic-bezier(.22,1,.36,1)}
+a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
+.h2-soon{position:absolute;top:16px;left:16px;z-index:3;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.92);font-size:12px;font-weight:500;color:var(--ink)}
+.h2-blur img{filter:blur(3px)}
+
+/* card scenes */
+.sc-web{background:radial-gradient(90% 90% at 70% 10%,#E58A5B 0%,#C25A30 55%,#9C4122 100%)}
+.sc-web .dev-lap{left:14%;width:72%;top:16%;transform:perspective(1400px) rotateX(10deg) rotateZ(-3deg)}
+.sc-dark{background:radial-gradient(120% 90% at 30% 20%,#3A3B3E 0%,#1C1D1F 55%,#121314 100%)}
+.sc-dark .dev-lap{left:9%;width:62%;top:14%}
+.sc-dark .dev-phone{left:67%;width:19%;top:12%;rotate:7deg}
+.sc-opt{background:radial-gradient(90% 90% at 30% 0%,#CFC8FA 0%,#A79BF0 50%,#7D6FDC 100%)}
+.sc-opt .dev-lap{left:7%;width:66%;top:17%}
+.sc-opt .dev-phone{left:68%;width:21%;top:21%;rotate:4deg}
+.sc-opt .shade,.sc-web .shade{position:absolute;left:8%;right:8%;bottom:6%;height:14%;border-radius:50%;background:rgba(40,20,90,.35);filter:blur(22px)}
+.sc-web .shade{background:rgba(70,20,5,.45)}
+.sc-short{background:linear-gradient(180deg,#5D7EC4 0%,#8FAEE0 70%,#B9CDEE 100%)}
+.sc-short .dev-lap{left:16%;width:68%;top:18%}
+.sc-bosta{background:radial-gradient(90% 90% at 70% 0%,#E9F1DF 0%,#C9DCC0 60%,#A9C4A0 100%)}
+.sc-bosta .dev-phone{left:39%;width:22%;top:12%;rotate:-6deg}
+.skel-scr{display:flex;flex-direction:column;gap:7%;aspect-ratio:.461;padding:12% 9%;box-sizing:border-box;border-radius:12% / 5.5%;background:#FFFFFF;filter:blur(3px)}
+.skel-scr i{display:block;height:6%;border-radius:6px;background:#E6E8E3}
+.skel-scr i.b{height:26%;background:#F3C83F}
+.skel-scr i.s{width:60%}
+
+
+/* process */
+.pr{position:relative;padding:clamp(72px,9vw,120px) 0;background:#F4F4F3;box-shadow:0 0 0 100vmax #F4F4F3;clip-path:inset(0 -100vmax)}
+.pr-head{position:relative;margin-bottom:clamp(56px,7vw,96px);padding-left:4px}
+.pr-head .n{margin:0 0 10px;font-size:15px;color:var(--ink)}
+.pr-head h2{position:relative;margin:0;padding-bottom:14px;font-family:var(--head);font-size:clamp(34px,4vw,56px);line-height:1;font-weight:500;letter-spacing:-.035em;color:var(--ink)}
+.pr-head h2::after{content:"";position:absolute;left:-20px;right:-20px;bottom:0;height:1px;background:#F2694B;opacity:.75}
+.pr-head::before{content:"";position:absolute;left:0;top:18px;bottom:-30px;width:1px;background:#F2694B;opacity:.75}
+.pr-head p{margin:20px 0 0;max-width:560px;font-size:17px;line-height:1.55;color:var(--soft)}
+.pr-list{display:flex;flex-direction:column;gap:110px}
+.pr-row{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);width:58%;height:310px;background:#FFFFFF;box-shadow:0 1px 0 rgba(14,15,17,.04)}
+.pr-row.r{margin-left:auto}
+.pr-txt{display:flex;flex-direction:column;justify-content:space-between;padding:28px 28px 30px}
+.pr-lab{margin:0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8A8D93}
+.pr-txt h3{margin:0 0 12px;font-family:var(--head);font-size:clamp(20px,1.7vw,25px);line-height:1.2;font-weight:500;letter-spacing:-.02em;color:var(--ink)}
+.pr-txt p{margin:0;font-size:15px;line-height:1.6;color:var(--soft)}
+.pr-img{position:relative;overflow:hidden}
+.pr-img img{position:absolute;left:12%;top:14%;width:88%;height:auto;border-radius:8px 0 0 0;box-shadow:0 20px 50px rgba(14,15,17,.22);transition:scale 1.2s cubic-bezier(.45,0,.2,1);transform-origin:0 0}
+.pr-row:hover .pr-img img{scale:1.05}
+.pr-img svg{position:absolute;inset:0;width:100%;height:100%;transition:scale 1.2s cubic-bezier(.45,0,.2,1)}
+.pr-row:hover .pr-img svg{scale:1.05}
+.ill-draw{stroke-dasharray:900;stroke-dashoffset:900;animation:illDraw 3s cubic-bezier(.45,0,.2,1) .3s forwards}
+@keyframes illDraw{to{stroke-dashoffset:0}}
+.ill-pulse{transform-origin:360px 150px;animation:illPulse 2.4s ease-out infinite}
+@keyframes illPulse{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(2.6)}}
+.ill-spin{transform-origin:200px 150px;animation:illSpin 9s linear infinite}
+@keyframes illSpin{to{transform:rotate(360deg)}}
+.ill-a{animation:illA 7s ease-in-out infinite}.ill-b{animation:illB 7s ease-in-out infinite}.ill-c{animation:illC 7s ease-in-out infinite}
+@keyframes illA{50%{transform:translate(10px,6px)}}@keyframes illB{50%{transform:translate(-10px,6px)}}@keyframes illC{50%{transform:translate(0,-8px)}}
+.ill-spin2{animation:illSpin 9s linear infinite}
+.ill-type rect{transform-box:fill-box;transform-origin:left center;animation:illType 5s cubic-bezier(.45,0,.2,1) infinite}
+.ill-type rect:nth-child(2n){animation-delay:.25s}.ill-type rect:nth-child(3n){animation-delay:.5s}
+@keyframes illType{0%{transform:scaleX(0)}25%,85%{transform:scaleX(1)}100%{transform:scaleX(1)}}
+.ill-flow{stroke-dasharray:5 7;animation:illFlow 1.6s linear infinite}
+@keyframes illFlow{to{stroke-dashoffset:-24}}
+.ill-pop{transform-box:fill-box;transform-origin:center;animation:illPop 3.2s ease-in-out infinite}
+@keyframes illPop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.ill-cursor{animation:illCur 3.2s ease-in-out infinite}
+@keyframes illCur{0%,100%{transform:translate(0,0)}50%{transform:translate(-8px,-12px)}}
+.net{stroke-dasharray:1400;stroke-dashoffset:1400;animation:netDraw 2.6s cubic-bezier(.45,0,.2,1) var(--d) forwards}
+.net-main{stroke-dasharray:120;stroke-dashoffset:120;animation:netDraw .9s cubic-bezier(.22,1,.36,1) 2.5s forwards}
+@keyframes netDraw{to{stroke-dashoffset:0}}
+.ill-stack{animation:illUp 6s ease-in-out infinite}
+@keyframes illUp{50%{transform:translateY(-8px)}}
+.pr-img img.pr-3d{left:0;top:0;width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none;transform-origin:50% 50%}
+.pr-img.c1{background:radial-gradient(90% 90% at 80% 0%,#E9F1DF,#B9D2AE)}
+.pr-img.c2{background:radial-gradient(90% 90% at 20% 0%,#D9D3FB,#9384E6)}
+.pr-img.c3{background:radial-gradient(90% 90% at 80% 0%,#F6C9A9,#D77A4B)}
+.pr-img.c4{background:radial-gradient(90% 90% at 20% 0%,#C9DAF5,#6F90CF)}
+.pr-wire{position:absolute;top:155px;height:265px;pointer-events:none}
+.pr-row.l .pr-wire{left:100%;width:34%}
+.pr-row.r .pr-wire{right:100%;width:34%;transform:scaleX(-1)}
+.pr-wire svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pr-wire path{fill:none;stroke:#0E0F11;stroke-width:1.5;stroke-linecap:round}
+.pr-wire .dot{position:absolute;left:0;top:0;width:6px;height:6px;margin:-4px 0 0 -4px;border-radius:50%;background:#FFFFFF;border:1px solid #0E0F11;z-index:2}
+.pr-wire .tip{position:absolute;left:0;top:0;width:7px;height:7px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#D6F25A;border:1px solid #0E0F11;z-index:2;transition:opacity .2s ease}
+.pr-wire .head{position:absolute;left:0;top:0;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #0E0F11;opacity:0;transform:translateY(-4px);transition:opacity .2s ease,transform .25s cubic-bezier(.22,1,.36,1)}
+.pr-wire .sen{position:absolute;left:0;top:0;width:1px;height:calc(100% + 320px);pointer-events:none}
+.pr-wire .lab{position:absolute;left:18px;top:-26px;font-size:13px;color:var(--soft);white-space:nowrap}
+.pr-row.r .pr-wire .lab{transform:scaleX(-1)}
+.pr-wire[data-done="1"] .tip{opacity:0}
+.pr-wire[data-done="1"] .head{opacity:1;transform:none}
+.pr-ai{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:3px 8px;border-radius:99px;background:#EEF9D2;color:#3F5A06;font-size:11px;letter-spacing:.06em}
+@media (max-width: 900px){
+  .pr-list{gap:20px}
+  .pr-row,.pr-row.r{width:100%;height:auto;margin:0;grid-template-columns:1fr}
+  .pr-img{order:-1;aspect-ratio:16 / 9}
+  .pr-txt{gap:28px}
+  .pr-wire{display:none}
+}
+
+@media (max-width: 900px){.h2-herogrid{grid-template-columns:1fr}.h2-snaps{width:100%;max-width:440px}}
+@media (max-width: 760px){
+  .h2-nav{grid-template-columns:1fr auto}.h2-where{display:none}
+  .h2-cols{grid-template-columns:repeat(3,1fr)}
+  .h2-scene{aspect-ratio:4 / 4.2}
+  .h2-scene .dev-lap{left:6%;width:82%;top:14%}
+  .h2-scene .dev-phone{left:58%;width:34%;top:42%}
+  .h2-whead{grid-template-columns:1fr auto}.h2-whead .yrs{display:none}
+  .h2-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  .h2-rise{animation:none;opacity:1;transform:none}
+  .h2-scene .dev-lap,.h2-scene .dev-phone{animation:none}.snap{animation:none}.snap:first-child{opacity:1}
+  .h2-stage,.h2-btn b,.h2-burger span,.h2-menu,.pr-img img,.pr-img svg{transition:none}
+  .ill-draw,.net,.net-main{animation:none;stroke-dashoffset:0}.net,.net-main,.ill-pulse,.ill-flow,.ill-pop,.ill-cursor,.ill-spin,.ill-spin2,.ill-type rect,.ill-a,.ill-b,.ill-c,.ill-stack{animation:none}
+}
 </style>
+<script>
+/* Direction of the page transition: going to the home page plays it backwards. */
+(function () {
+  function isHome(u) {
+    try { var f = new URL(u, location.href).pathname.split('/').pop(); return f === '' || /^(index|home)\.html$/.test(f) || /^(Landing|Home-v2)\.dc\.html$/.test(f); } catch (e) { return false; }
+  }
+  addEventListener('pageswap', function (e) {
+    if (e.viewTransition && e.activation && e.activation.entry) e.viewTransition.types.add(isHome(e.activation.entry.url) ? 'back' : 'forward');
+  });
+  addEventListener('pagereveal', function (e) {
+    if (e.viewTransition) e.viewTransition.types.add(isHome(location.href) ? 'back' : 'forward');
+  });
+})();
+</script>
 <style id="site-fixes">
 html{scroll-behavior:smooth}
 section[id]{scroll-margin-top:88px}
@@ -72,206 +268,106 @@ section[id]{scroll-margin-top:88px}
 <div id="dc-root"></div>
 <template id="dc-template">
 
-<div id="pg-root" style="position: relative; background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
-<div aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; pointer-events: none"><sc-for list="{{ pmarks }}" as="m" hint-placeholder-count="0"><span data-p="{{ m.i }}" style="{{ m.style }}"></span></sc-for></div>
-<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); box-sizing: border-box">
+<div class="h2-page" style="background: #FFFFFF; color: #0E0F11; font-family: Inter, system-ui, sans-serif; min-height: 100vh">
+<div class="h2-wrap">
+<div class="h2-cols" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
-<header id="pg-nav" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding: 28px 0">
-<a href="#top" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #0E0F11">
-<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.02em">Nada Ibrahim</span>
-<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Senior Product Designer</span>
-</a>
-<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
-<a class="navlink" href="#work" style="font-size: 15px; color: #6B6F76; text-decoration: none">Work</a>
-
-<a class="navlink" href="Nada-Ibrahim-Resume.pdf" download style="font-size: 15px; color: #6B6F76; text-decoration: none">Résumé</a>
-<a class="btn" href="#contact" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #F4F4F1; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Get in touch<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<header class="h2-nav">
+<a class="h2-mark" href="#top">NADA IBRAHIM</a>
+<p class="h2-where" style="margin: 0"><span>Working remotely</span><i></i><span class="t">{{ time }}</span></p>
+<button class="h2-burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}"><span></span><span></span></button>
+<nav class="h2-menu" aria-label="Main" style="{{ menuStyle }}">
+<a href="#work" onClick="{{ closeMenu }}">Work</a>
+<a href="#process" onClick="{{ closeMenu }}">How I work</a>
+<a href="Nada-Ibrahim-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+<a href="mailto:nada.i.mahmoud25@gmail.com">Get in touch</a>
 </nav>
 </header>
 
-<section id="top" style="display: flex; flex-wrap: wrap; gap: 32px 48px; padding: clamp(56px, 7vw, 104px) 0 clamp(64px, 8vw, 112px)">
-<div class="nav-spacer" style="flex: 1 1 200px"></div>
-<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
-<p style="margin: 0; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: #6B6F76"><span style="width: 8px; height: 8px; border-radius: 999px; background: {{accent}}"></span>Open to senior roles · Remote · B2B contract or EOR</p>
-<div style="display: flex; flex-direction: column; gap: 20px">
-<h1 style="margin: 0; max-width: 820px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(30px, 3.3vw, 46px); line-height: 1.12; font-weight: 500; letter-spacing: -0.025em; color: #0E0F11">Designer who turns unclear briefs into shipped products, <span style="color: rgb(107, 111, 118)">and brings business, product and engineering along the way.</span></h1>
-<p style="margin: 0; max-width: 600px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.55; color: #4A4D52">I’m Nada, a Senior Product Designer at <strong style="font-weight: 600; color: rgb(14, 15, 17)">Awaed</strong>, designing investment and trading for the Saudi and US markets. I’ve spent 6+ years across fintech, logistics, SaaS, health and more.</p>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a class="btn" href="#work" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">See selected work<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 3v8M3.5 7.5L7 11l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-<a class="btn" href="Nada-Ibrahim-Resume.pdf" download style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #E6E6E3; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Résumé<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2.5v8M3.5 7L7 10.5L10.5 7M3 12.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-</div>
-</div>
+<div class="h2-herogrid">
+<section id="top" class="h2-hero">
+<div class="h2-photo h2-rise"><img src="assets/614049d65ce39645a4a11e76d156a4f8.webp" alt="Nada Ibrahim, smiling, in a white headscarf and shirt" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+<h1 class="h2-h1 h2-rise h2-d1"><span>Nada Ibrahim</span><span>Senior Product Designer</span></h1>
+<p class="h2-lede h2-rise h2-d2">I turn unclear briefs into shipped products, and bring business, product and engineering along the way. Right now I’m at Awaed, designing investment and trading for the Saudi and US markets.</p>
+<a class="h2-btn h2-rise h2-d3" href="mailto:nada.i.mahmoud25@gmail.com">Get in touch<b aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></b></a>
 </section>
-
-
-
-<section id="work" style="display: flex; flex-wrap: wrap; gap: 32px 48px; padding: clamp(64px, 8vw, 112px) 0; border-top: 1px solid #E6E6E3">
-<div style="flex: 1 1 220px; align-self: flex-start; position: sticky; top: 104px; display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6F76">Selected work</p>
-<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em">Products I’ve shaped, end to end</h2>
-<p style="margin: 0; max-width: 260px; font-size: 15px; line-height: 1.5; color: #6B6F76">Products I designed end to end, for the people using them and the teams running them.</p>
+<div class="h2-snaps h2-rise h2-d4" role="img" aria-label="Snapshots of my work: Awaed Options, Web Trader and the Awaed mobile app"><div class="h2-sbox" aria-hidden="true">
+<div class="snap sc-dark"><div class="h2-glow"></div><div class="h2-slab"></div><div class="h2-grain"></div><div class="dev-lap"><div class="scr"><img src="assets/57257e292df3d642d136cbfd41e182e3.webp" alt=""></div><div class="base"></div></div><div class="dev-phone"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><img src="assets/4dbdbdc9998aa7c5516cb36dab3ee7d5.webp" alt=""></div></div>
+<div class="snap sc-web"><div class="shade"></div><div class="dev-lap"><div class="scr"><img src="assets/6b77d9c22ff9f313e7b77d0c7c6f0e47.webp" alt=""></div><div class="base"></div></div></div>
+<div class="snap sc-opt"><div class="dev-phone p1"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><img src="assets/53dcadd8d6023e93f3711ac8859f216c.webp" alt=""></div><div class="dev-phone p2"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><img src="assets/c9a51a687cdf2a2c5c4800b99464dc87.webp" alt=""></div></div>
+<div class="snap sc-short2"><div class="dev-lap"><div class="scr"><img src="assets/76c6310e22d7d9c05e2fcb6d05c72d77.webp" alt=""></div><div class="base"></div></div></div>
+</div></div>
 </div>
-<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(64px, 7vw, 96px)">
 
-<a class="card" href="awaed-web-trader.html" style="display: flex; flex-direction: column; gap: 24px; color: #0E0F11; text-decoration: none">
-<div class="tile" style="--tint: #D9E4DA; position: relative; aspect-ratio: 16 / 10; border-radius: 12px; background: #EDEEF0; overflow: hidden">
-<div class="shot full" style="background: #000000"><img src="assets/fb6ef67bc83eabd73c8ded325fafad22.webp" alt="Awaed Web Trader stock detail screen: TSLA chart, position and order ticket"></div>
-<span class="float" style="position: absolute; top: 11%; right: 5%; rotate: -4deg; padding: 8px 14px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 13px; font-weight: 500">Foundation for options</span>
-<span class="float" style="position: absolute; bottom: 22%; right: 4%; rotate: 5deg; padding: 8px 14px; border-radius: 999px; background: #FFFFFF; color: #0E0F11; font-size: 13px; font-weight: 500; box-shadow: 0 6px 20px rgba(14, 15, 17, 0.10)">2 markets · 2 languages</span>
+<section id="work" class="h2-work">
+<div class="h2-whead">
+<div><p class="n">01</p><h2>Selected work</h2></div>
+<p class="yrs">(2020 – 2026)</p>
+<a class="all" href="Nada-Ibrahim-Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px"><p style="margin: 0; font-size: 15px; font-weight: 500">Awaed Web Trader</p><p style="margin: 0; font-size: 15px; color: #6B6F76">Web · In beta</p></div>
-<h2 class="ttl" style="margin: 0; max-width: 820px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(22px, 1.9vw, 26px); line-height: 1.22; font-weight: 500; letter-spacing: -0.015em">Web trading for two markets, with every rule made clear.</h2>
-<p style="margin: 0; font-size: 15px; color: #6B6F76">0 to 1 ∙ Design system ∙ Two markets, two languages ∙ In beta</p>
-<span class="cta" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: #2643E9">Read the case study <span class="arr" aria-hidden="true">→</span></span>
-</div>
+<div class="h2-grid">
+
+<a class="h2-card" href="awaed-web-trader">
+<div class="h2-tile sc-web"><div class="h2-stage">
+<div class="shade"></div>
+<div class="dev-lap"><div class="scr"><img src="assets/6b77d9c22ff9f313e7b77d0c7c6f0e47.webp" alt="Awaed Web Trader portfolio screen on a laptop"></div><div class="base"></div></div>
+</div></div>
+<div class="h2-cap"><span class="ttl">Awaed Web Trader</span><span>Web · Fintech</span></div>
 </a>
 
-<a class="card" href="options-trading.html" style="display: flex; flex-direction: column; gap: 24px; color: #0E0F11; text-decoration: none">
-<div class="tile" style="--tint: #E3E1F5; position: relative; aspect-ratio: 16 / 10; border-radius: 12px; background: #EDEEF0; overflow: hidden">
-<div class="shot full" style="background: #000000"><img src="assets/fe3d7e6f3bf8a94e6f107c03276fb281.webp" alt="Awaed Options view: a Calls and Puts toggle above a single option chain table"></div>
-<span class="float" style="position: absolute; top: 12%; right: 7%; rotate: 6deg; padding: 8px 14px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 13px; font-weight: 500">Web + mobile</span>
-<span class="float" style="position: absolute; bottom: 18%; left: 5%; rotate: -5deg; padding: 8px 14px; border-radius: 999px; background: #FFFFFF; color: #0E0F11; font-size: 13px; font-weight: 500; box-shadow: 0 6px 20px rgba(14, 15, 17, 0.10)">Now in beta</span>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px"><p style="margin: 0; font-size: 15px; font-weight: 500">Awaed Options Trading</p><p style="margin: 0; font-size: 15px; color: #6B6F76">Web + mobile · In beta</p></div>
-<h2 class="ttl" style="margin: 0; max-width: 820px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(22px, 1.9vw, 26px); line-height: 1.22; font-weight: 500; letter-spacing: -0.015em">Options trading that first-time investors can understand.</h2>
-<p style="margin: 0; font-size: 15px; color: #6B6F76">0 to 1 ∙ Web + mobile ∙ Validated with a prototype ∙ In beta</p>
-<span class="cta" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: #2643E9">Read the case study <span class="arr" aria-hidden="true">→</span></span>
-</div>
+<a class="h2-card" href="options-trading">
+<div class="h2-tile sc-dark"><div class="h2-stage">
+<div class="h2-glow"></div>
+<div class="h2-slab"></div>
+<div class="h2-grain"></div>
+<div class="dev-lap"><div class="scr"><img src="assets/57257e292df3d642d136cbfd41e182e3.webp" alt="Awaed Options on a laptop: buying a TSLA call, with the option chain and the order ticket"></div><div class="base"></div></div>
+<div class="dev-phone"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><img src="assets/4dbdbdc9998aa7c5516cb36dab3ee7d5.webp" alt="Awaed Options on an iPhone: the TSLA calls option chain with strike, bid and ask"></div>
+</div></div>
+<div class="h2-cap"><span class="ttl">Awaed Options</span><span>Web &amp; Mobile</span></div>
 </a>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px 32px">
-<div class="card soon" style="display: flex; flex-direction: column; gap: 24px; color: #0E0F11; text-decoration: none">
-<div class="tile" style="position: relative; aspect-ratio: 4 / 3; border-radius: 12px; background: #EDEEF0; overflow: hidden">
-<div class="shot" aria-hidden="true" style="position: absolute; left: 10%; right: 10%; top: 20%; bottom: 0; border-radius: 10px 10px 0 0; background: #000000; box-shadow: 0 20px 60px rgba(14, 15, 17, 0.16); overflow: hidden"><img src="assets/34017ce3c07efd792146102249357d87.webp" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; filter: blur(2.5px); transform: scale(1.03)"></div>
-<span class="float" style="position: absolute; top: 12%; right: 6%; rotate: -5deg; padding: 8px 14px; border-radius: 999px; background: #FFFFFF; color: #0E0F11; font-size: 13px; font-weight: 500; box-shadow: 0 6px 20px rgba(14, 15, 17, 0.10)">Coming soon</span>
+<div class="h2-card">
+<div class="h2-tile sc-short"><span class="h2-soon">Coming soon</span><div class="h2-stage h2-blur">
+<div class="dev-lap"><div class="scr"><img src="assets/34017ce3c07efd792146102249357d87.webp" alt=""></div><div class="base"></div></div>
+</div></div>
+<div class="h2-cap"><span>Awaed Short Sell</span><span>Web · Fintech</span></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px"><p style="margin: 0; font-size: 15px; font-weight: 500">Short Sell · Awaed</p><p style="margin: 0; font-size: 15px; color: #6B6F76">Web + mobile</p></div>
-<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(22px, 1.8vw, 24px); line-height: 1.25; font-weight: 500; letter-spacing: -0.015em">Short selling, built on the direction the prototype proved.</h2>
-<p style="margin: 0; font-size: 15px; color: #6B6F76">Case study coming soon</p>
-</div>
-</div>
-<div class="card soon" style="display: flex; flex-direction: column; gap: 24px; color: #0E0F11; text-decoration: none">
-<div class="tile" style="position: relative; aspect-ratio: 4 / 3; border-radius: 12px; background: #EDEEF0; overflow: hidden">
-<div class="shot skel" aria-hidden="true" style="position: absolute; left: 26%; right: 26%; top: 18%; bottom: 0; border-radius: 14px 14px 0 0; background: #FFFFFF; box-shadow: 0 20px 60px rgba(14, 15, 17, 0.10); filter: blur(5px); overflow: hidden; display: flex; flex-direction: column; gap: 10px; padding: 14px; box-sizing: border-box">
-<span style="display: block; width: 60%; height: 10px; border-radius: 4px; background: #0E0F11"></span>
-<div style="border-radius: 8px; background: #F4F4F1; padding: 10px; display: flex; flex-direction: column; gap: 8px"><span style="display: block; width: 40%; height: 8px; border-radius: 4px; background: #2643E9"></span><span style="display: block; height: 6px; border-radius: 999px; background: #E6E6E3"></span><span style="display: block; width: 70%; height: 6px; border-radius: 999px; background: #E6E6E3"></span></div>
-<div style="display: flex; flex-direction: column; gap: 8px; padding-left: 6px; border-left: 2px solid #E6E6E3"><span style="display: block; width: 80%; height: 8px; border-radius: 4px; background: #D6D6D2"></span><span style="display: block; width: 65%; height: 8px; border-radius: 4px; background: #D6D6D2"></span><span style="display: block; width: 72%; height: 8px; border-radius: 4px; background: #D6D6D2"></span></div>
-<span style="display: block; margin-top: auto; height: 24px; border-radius: 999px; background: #0E0F11"></span>
-</div>
-<span class="float" style="position: absolute; bottom: 20%; right: 8%; rotate: 5deg; padding: 8px 14px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 13px; font-weight: 500">Coming soon</span>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px"><p style="margin: 0; font-size: 15px; font-weight: 500">Bosta</p><p style="margin: 0; font-size: 15px; color: #6B6F76">Mobile + web · 2023–25</p></div>
-<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(22px, 1.8vw, 24px); line-height: 1.25; font-weight: 500; letter-spacing: -0.015em">Delivery tracking that keeps customers and ops teams in sync.</h2>
-<p style="margin: 0; font-size: 15px; color: #6B6F76">Case study coming soon</p>
-</div>
-</div>
+
+<div class="h2-card">
+<div class="h2-tile sc-bosta"><span class="h2-soon">Coming soon</span><div class="h2-stage">
+<div class="dev-phone"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><div class="skel-scr"><i class="s"></i><i class="b"></i><i></i><i></i><i class="s"></i><i></i></div></div>
+</div></div>
+<div class="h2-cap"><span>Bosta Delivery Tracking</span><span>Mobile · Logistics</span></div>
 </div>
 
 </div>
 </section>
 
+<section id="process" class="pr">
+<div class="pr-head"><p class="n">02</p><h2>How I take a project from unclear to shipped</h2><p>From a messy first brief to a product that’s ready to ship, with AI and code in the loop. Here’s the path, linked up like one of my prototypes.</p></div>
+<div class="pr-list">
+<article class="pr-row l">
+<div class="pr-txt"><p class="pr-lab">01 / Unlock ambiguity</p><div><h3>Turn an unclear brief into a clear problem</h3><p>I gather what’s scattered across PMs, stakeholders and engineers, map the rules and edge cases, and agree on what success looks like before I design anything.</p></div></div>
+<div class="pr-img c1"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A messy line being drawn by hand, from a tangle to a clear end point"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#5E7F4F"/><stop offset="1" stop-color="#1F3A1A"/></linearGradient></defs><g><path id="mess" d="M40,170 C60,90 120,230 140,150 S90,60 170,120 S120,230 210,170 S180,90 240,140 C280,170 300,150 360,150" pathLength="1" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"><animate attributeName="stroke-dashoffset" dur="3.6s" begin="indefinite" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.62;0.9;1" keySplines=".4 0 .3 1;0 0 1 1;0 0 1 1" values="1;0;0;0"/></path><animate attributeName="opacity" dur="3.6s" begin="indefinite" repeatCount="indefinite" keyTimes="0;0.62;0.9;1" values="1;1;1;0"/></g><circle cx="40" cy="170" r="4" fill="#1F3A1A"/><g opacity="0"><circle cx="360" cy="150" r="5" fill="#FFFFFF" stroke="#1F3A1A" stroke-width="2"/><circle class="ill-pulse" cx="360" cy="150" r="5" fill="none" stroke="#1F3A1A" stroke-width="1.5"/><animate attributeName="opacity" dur="3.6s" begin="indefinite" repeatCount="indefinite" keyTimes="0;0.6;0.64;0.9;1" values="0;0;1;1;0"/></g><circle r="4.5" opacity="0" fill="#D6F25A" stroke="#1F3A1A" stroke-width="1.5"><animateMotion dur="3.6s" begin="indefinite" repeatCount="indefinite" calcMode="spline" keyPoints="0;1;1;1" keyTimes="0;0.62;0.9;1" keySplines=".4 0 .3 1;0 0 1 1;0 0 1 1" path="M40,170 C60,90 120,230 140,150 S90,60 170,120 S120,230 210,170 S180,90 240,140 C280,170 300,150 360,150"/><animate attributeName="opacity" dur="3.6s" begin="indefinite" repeatCount="indefinite" keyTimes="0;0.6;0.63;1" values="1;1;0;0"/></circle></svg></div>
+<div class="pr-wire" aria-hidden="true"><svg><path d=""></path></svg><span class="dot"></span><span class="tip"></span><span class="head"></span><span class="sen"></span></div>
+</article>
+<article class="pr-row r">
+<div class="pr-txt"><p class="pr-lab">02 / Prototype with AI</p><div><h3>Prototype in code, not only in Figma</h3><p>I build working prototypes with AI, on top of the existing codebase when there is one, so we test real flows with real data in days, not weeks. The design judgement stays mine.</p></div></div>
+<div class="pr-img c2"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A code editor with an AI spark, turning code into a working prototype on a phone"><rect x="40" y="62" width="220" height="176" rx="12" fill="#17132E"/><circle cx="58" cy="80" r="4" fill="#F2694B"/><circle cx="72" cy="80" r="4" fill="#F2B33D"/><circle cx="86" cy="80" r="4" fill="#3DDC84"/><g class="ill-type"><rect x="58" y="102" width="70" height="7" rx="3.5" fill="#8E7FE6"/><rect x="134" y="102" width="46" height="7" rx="3.5" fill="#D6F25A"/><rect x="70" y="120" width="96" height="7" rx="3.5" fill="#5D4FBF"/><rect x="70" y="138" width="60" height="7" rx="3.5" fill="#C9C2F7"/><rect x="136" y="138" width="54" height="7" rx="3.5" fill="#8E7FE6"/><rect x="82" y="156" width="110" height="7" rx="3.5" fill="#5D4FBF"/><rect x="82" y="174" width="72" height="7" rx="3.5" fill="#D6F25A"/><rect x="70" y="192" width="40" height="7" rx="3.5" fill="#C9C2F7"/><rect x="58" y="210" width="28" height="7" rx="3.5" fill="#8E7FE6"/></g><path d="M262,150 C285,150 288,150 300,150" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 5" fill="none"/><rect x="300" y="78" width="78" height="150" rx="16" fill="#FFFFFF"/><rect x="330" y="86" width="18" height="5" rx="2.5" fill="#17132E"/><rect x="312" y="104" width="54" height="34" rx="7" fill="#E7E3FD"/><rect x="312" y="146" width="44" height="6" rx="3" fill="#D9D6EA"/><rect x="312" y="158" width="54" height="6" rx="3" fill="#D9D6EA"/><rect x="312" y="196" width="54" height="18" rx="9" fill="#6A57D9"/><g transform="translate(236 70)"><circle r="22" fill="#FFFFFF"/><path class="ill-spin2" d="M0,-14 C2,-4 4,-2 14,0 C4,2 2,4 0,14 C-2,4 -4,2 -14,0 C-4,-2 -2,-4 0,-14 Z" fill="#6A57D9"/></g></svg></div>
+<div class="pr-wire" aria-hidden="true"><svg><path d=""></path></svg><span class="dot"></span><span class="tip"></span><span class="head"></span><span class="sen"></span></div>
+</article>
+<article class="pr-row l">
+<div class="pr-txt"><p class="pr-lab">03 / Align</p><div><h3>Decide by using, not imagining</h3><p>Business, product and engineering try the prototype themselves. I walk through the trade-offs and bring everyone to one decision.</p></div></div>
+<div class="pr-img c3"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Business, product and engineering each try the prototype, and their paths meet in one decision"><g fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path class="ill-flow" d="M150,88 C210,88 210,150 262,150"/><path class="ill-flow" d="M150,150 H262"/><path class="ill-flow" d="M150,212 C210,212 210,150 262,150"/></g><g font-family="Inter, sans-serif" font-size="12.5" font-weight="600" fill="#7A3414"><rect x="56" y="72" width="94" height="32" rx="16" fill="#FFFFFF"/><text x="103" y="92.5" text-anchor="middle">Business</text><rect x="56" y="134" width="94" height="32" rx="16" fill="#FFFFFF"/><text x="103" y="154.5" text-anchor="middle">Product</text><rect x="48" y="196" width="110" height="32" rx="16" fill="#FFFFFF"/><text x="103" y="216.5" text-anchor="middle">Engineering</text></g><g class="ill-pop"><rect x="262" y="118" width="96" height="64" rx="14" fill="#FFFFFF"/><circle cx="286" cy="150" r="11" fill="#7A3414"/><path d="M281,150 l4,4 l7,-8" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="304" y="140" width="40" height="7" rx="3.5" fill="#F0C2A5"/><rect x="304" y="153" width="28" height="7" rx="3.5" fill="#F6DCCB"/></g><path class="ill-cursor" d="M330,186 l0,22 l6,-6 l5,10 l4,-2 l-5,-10 l8,0 z" fill="#0E0F11" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+<div class="pr-wire" aria-hidden="true"><svg><path d=""></path></svg><span class="dot"></span><span class="tip"></span><span class="head"></span><span class="sen"></span></div>
+</article>
+<article class="pr-row r">
+<div class="pr-txt"><p class="pr-lab">04 / Ship</p><div><h3>Ship from a head start</h3><p>Because the prototype lives in the codebase, engineering starts from working code. I design every rule, language and edge case, and stay close until it’s live.</p></div></div>
+<div class="pr-img c4"><img class="pr-3d" src="assets/aff8b9c08cd8228584008280738cb6f3.webp" alt="White steps rising to an open door"></div>
 
-
-<section id="experience" style="display: flex; flex-wrap: wrap; gap: 32px 48px; padding: clamp(64px, 8vw, 112px) 0; border-top: 1px solid #E6E6E3">
-<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 4px">
-<p style="margin: 0; font-size: 15px; font-weight: 500">+ Experience</p>
-<p style="margin: 0; font-size: 15px; color: #6B6F76">Where I’ve designed and taught since 2020</p>
-</div>
-<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #0E0F11">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Aug 2025 – Present</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px"><h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Senior Product Designer · Awaed</h3><span style="padding: 3px 10px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 500">Present</span></div>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Saudi Arabia · Full time · Investment</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">End-to-end design for an investment platform in KSA, from research and documentation to UX strategy and delivery.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Mar 2024 – Present</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px"><h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Lead UX/UI Coach · neuefische</h3><span style="padding: 3px 10px; border-radius: 999px; background: #F4F4F1; color: #4A4D52; font-size: 12px; font-weight: 500">Teaching</span></div>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Germany · Part time</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Mentoring designers through intensive UX/UI bootcamps: foundations, research, prototyping and portfolios. I design and run workshops and give hands-on feedback.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">May 2023 – Jul 2025</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Senior Product Designer · Flex AI</h3>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Canada · Part time · AI fitness</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Shaped an AI-driven fitness platform: personalised workout programmes, calorie tracking and achievements. Owned user research, product strategy and the design system.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Mar 2023 – Mar 2024</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px"><h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">UI/UX Instructor · UX Gate</h3><span style="padding: 3px 10px; border-radius: 999px; background: #F4F4F1; color: #4A4D52; font-size: 12px; font-weight: 500">Teaching</span></div>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Egypt · Freelance</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Created and recorded courses on UI/UX principles, tools and workflows, so learners could build real skills and portfolios.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Jan 2023 – Jul 2025</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">Senior Product Designer · Bosta</h3>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Egypt · Full time · Logistics</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Led design for customer-facing and internal logistics products on mobile and web: order tracking, delivery management and the consignee experience, plus research and the design system.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Oct 2021 – Jun 2023</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">UI/UX Designer · Blink22</h3>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Dubai · Full time · SaaS, e-commerce, fintech, consumer</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Designed end-to-end web and mobile products for multiple clients, working with cross-functional teams from discovery to delivery.</p>
-</div>
-</div>
-
-<div class="xrow" style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-top: 1px solid #E6E6E3">
-<p style="flex: 1 1 160px; margin: 0; font-size: 14px; color: #6B6F76; font-feature-settings: 'tnum'">Jun 2021 – Feb 2022</p>
-<div style="flex: 999 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em">UI/UX Designer · Asgatech</h3>
-<p style="margin: 0; font-size: 13px; color: #6B6F76">Saudi Arabia · Full time · E-learning, medical, fintech, government</p>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D52">Designed applications across four sectors and contributed to project proposals, meeting both client needs and industry standards.</p>
-</div>
-</div>
-
-
-
-
-
+</article>
 </div>
 </section>
-
-<section id="contact" style="display: flex; flex-wrap: wrap; gap: 32px 48px; padding: clamp(72px, 9vw, 128px) 0; border-top: 1px solid #E6E6E3">
-<div class="nav-spacer" style="flex: 1 1 200px"></div>
-<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
-<h2 style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.1; font-weight: 500; letter-spacing: -0.025em">Got an unclear brief? <span style="color: #6B6F76">Let’s talk.</span></h2>
-<div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a class="btn" href="mailto:nada.i.mahmoud25@gmail.com" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #0E0F11; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">nada.i.mahmoud25@gmail.com<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-<a class="btn" href="https://www.linkedin.com/in/nada-ibrahim-120769132/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #E6E6E3; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">LinkedIn<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a><a class="btn" href="https://dribbble.com/Nadaibrahim25" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid #E6E6E3; color: #0E0F11; font-size: 15px; font-weight: 500; text-decoration: none; box-sizing: border-box">Dribbble<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-</div>
-</div>
-</section>
-
-<footer style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 32px; padding: 40px 0 48px; border-top: 1px solid #E6E6E3">
-<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-size: 15px; font-weight: 500">Navigate</p><a class="navlink" href="#work" style="font-size: 15px; color: #6B6F76; text-decoration: none">Work</a><a class="navlink" href="Nada-Ibrahim-Resume.pdf" download style="font-size: 15px; color: #6B6F76; text-decoration: none">Résumé</a></div>
-<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-size: 15px; font-weight: 500">Connect</p><a class="navlink" href="https://www.linkedin.com/in/nada-ibrahim-120769132/" target="_blank" rel="noopener" style="font-size: 15px; color: #6B6F76; text-decoration: none">LinkedIn</a><a class="navlink" href="https://dribbble.com/Nadaibrahim25" target="_blank" rel="noopener" style="font-size: 15px; color: #6B6F76; text-decoration: none">Dribbble</a><a class="navlink" href="mailto:nada.i.mahmoud25@gmail.com" style="font-size: 15px; color: #6B6F76; text-decoration: none">Email</a></div>
-<div style="display: flex; flex-direction: column; gap: 8px"><p style="margin: 0; font-size: 15px; font-weight: 500">Based in</p><p style="margin: 0; font-size: 15px; color: #6B6F76">Working remotely</p></div>
-<div style="display: flex; flex-direction: column; gap: 8px; justify-content: flex-end"><p style="margin: 0; font-size: 15px; color: #6B6F76">© 2026 Nada Ibrahim</p></div>
-</footer>
-
 </div>
 </div>
 </template>
@@ -279,53 +375,88 @@ section[id]{scroll-margin-top:88px}
 <script src="js/dc.js"></script>
 <script>
 class Component extends DCLogic {
-  componentDidMount() { this.pinInit(); }
-  componentWillUnmount() { this.pinStop(); }
-  pinInit() {
+  constructor(props) {
+    super(props);
+    this.state = { time: this.now(), open: false };
+  }
+  now() {
+    try {
+      var d = new Date();
+      var t = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/London' });
+      var z = 'GMT';
+      try {
+        var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', timeZoneName: 'short' }).formatToParts(d);
+        for (var i = 0; i < parts.length; i++) if (parts[i].type === 'timeZoneName') z = parts[i].value;
+      } catch (e) {}
+      return t + ' (' + z + ')';
+    } catch (e) { return ''; }
+  }
+  componentDidMount() {
     var self = this;
-    this.pn = 1500;
-    this.pvis = {};
-    this.pinScroll = function () {
-      var root = document.getElementById('pg-root');
-      if (!root) return;
-      var r = root.getBoundingClientRect();
-      if (r.top < 0) self.pinApply(-r.top);
-    };
-    document.addEventListener('scroll', this.pinScroll, { passive: true, capture: true });
-    var root = document.getElementById('pg-root');
-    if (!root || typeof IntersectionObserver === 'undefined') return;
-    this.pio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var i = Number(e.target.getAttribute('data-p'));
-        if (e.isIntersecting) self.pvis[i] = 1; else delete self.pvis[i];
+    this.clock = setInterval(function () { self.setState({ time: self.now() }); }, 20000);
+    this.wiresInit();
+    var startDraw = function () { var as = document.querySelectorAll('.pr-img.c1 animate, .pr-img.c1 animateMotion'); for (var i = 0; i < as.length; i++) { try { as[i].beginElement(); } catch (e) {} } };
+    var prSec = document.getElementById('process');
+    if (!prSec || typeof IntersectionObserver === 'undefined') startDraw();
+    else { this.drawIo = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { startDraw(); self.drawIo.disconnect(); } }); this.drawIo.observe(prSec); }
+  }
+  componentWillUnmount() { clearInterval(this.clock); if (this.prio) this.prio.disconnect(); if (this.drawIo) this.drawIo.disconnect(); window.removeEventListener('resize', this.wireLayout); }
+  wiresInit() {
+    var self = this;
+    this.wires = Array.prototype.slice.call(document.querySelectorAll('.pr-wire'));
+    this.wp = this.wires.map(function () { return 0; });
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this.wireLayout = function () {
+      self.wires.forEach(function (w, i) {
+        var W = w.offsetWidth, H = w.offsetHeight;
+        if (!W || !H) return;
+        var svg = w.querySelector('svg'), path = w.querySelector('path');
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        svg.setAttribute('width', W); svg.setAttribute('height', H);
+        path.setAttribute('d', 'M0,0 H' + (W * 0.5).toFixed(1) + ' C' + (W * 0.9).toFixed(1) + ',0 ' + W + ',' + (H * 0.12).toFixed(1) + ' ' + W + ',' + (H * 0.42).toFixed(1) + ' V' + (H - 6));
+        var hd = w.querySelector('.head'); hd.style.left = (W - 4) + 'px'; hd.style.top = (H - 7) + 'px';
+        w._len = path.getTotalLength();
+        path.style.strokeDasharray = w._len;
+        self.wireSet(i, self.reduce ? 1 : self.wp[i]);
       });
-      var keys = Object.keys(self.pvis);
-      if (!keys.length) return;
-      var lo = Infinity;
-      for (var k = 0; k < keys.length; k++) { var v = Number(keys[k]); if (v < lo) lo = v; }
-      self.pinApply(lo / (self.pn - 1) * root.offsetHeight);
-    });
-    var marks = root.querySelectorAll('[data-p]');
-    for (var m = 0; m < marks.length; m++) this.pio.observe(marks[m]);
+    };
+    this.wireLayout();
+    window.addEventListener('resize', this.wireLayout);
+    if (this.reduce) return;
+    if (typeof IntersectionObserver === 'undefined') { this.wires.forEach(function (w, i) { self.wireSet(i, 1); }); return; }
+    var th = []; for (var t = 0; t <= 200; t++) th.push(t / 200);
+    this.prio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var i = self.sens.indexOf(e.target), p, tot = e.boundingClientRect.height || 1, lead = 160;
+        if (e.isIntersecting && e.intersectionRect.top > e.boundingClientRect.top + 1) p = 1;
+        else if (e.isIntersecting) p = (e.intersectionRatio * tot - lead) / (tot - lead);
+        else p = self.wp[i] > 0.5 ? 1 : 0;
+        self.wireSet(i, Math.max(0, Math.min(1, p)));
+      });
+    }, { threshold: th });
+    this.sens = this.wires.map(function (w) { return w.querySelector('.sen'); });
+    this.sens.forEach(function (n) { self.prio.observe(n); });
   }
-  pinStop() {
-    if (this.pio) this.pio.disconnect();
-    if (this.pinScroll) document.removeEventListener('scroll', this.pinScroll, { capture: true });
-  }
-  pinApply(top) {
-    var nav = document.getElementById('pg-nav');
-    if (!nav) return;
-    var off = Math.max(0, Math.round(top));
-    nav.style.transform = off > 4 ? 'translateY(' + off + 'px)' : '';
-    nav.setAttribute('data-pinned', off > 4 ? '1' : '0');
-  }
-  pinMarks() {
-    var out = [];
-    for (var i = 0; i < 1500; i++) out.push({ i: i, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / 1499 * 100).toFixed(3) + '%' });
-    return out;
+  wireSet(i, p) {
+    var w = this.wires[i]; if (!w || !w._len) return;
+    this.wp[i] = p;
+    var path = w.querySelector('path'), tip = w.querySelector('.tip');
+    var L = w._len, d = L * p;
+    path.style.strokeDashoffset = (L - d).toFixed(1);
+    var pt = path.getPointAtLength(Math.max(0.01, d));
+    tip.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
+    tip.style.visibility = p <= 0.01 ? 'hidden' : 'visible';
+    w.setAttribute('data-done', p >= 0.995 ? '1' : '0');
   }
   renderVals() {
-    return { accent: this.props.accent ?? '#2643E9', pmarks: this.pinMarks() };
+    var self = this, o = this.state.open;
+    return {
+      time: this.state.time,
+      menuOpen: o ? 'true' : 'false',
+      menuStyle: o ? 'opacity: 1; transform: none; pointer-events: auto' : 'opacity: 0; transform: translateY(-6px) scale(.97); pointer-events: none',
+      toggleMenu: function () { self.setState({ open: !self.state.open }); },
+      closeMenu: function () { self.setState({ open: false }); }
+    };
   }
 }
 
@@ -341,7 +472,7 @@ if (Component.prototype.pinInit) {
   Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
   Component.prototype.pinMarks = function () { return []; };
 }
-DC.mount(Component, {"accent":"#2643E9"});
+DC.mount(Component, {});
 </script>
 </body>
 </html>

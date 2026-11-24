@@ -42,7 +42,9 @@ if (Component.prototype.pinInit) {
   Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
   Component.prototype.pinMarks = function () { return []; };
 }`;
-const RENAME = Object.fromEntries(PAGES.map((p) => [p.src, p.out]));
+// Clean URLs: the home link is "./" (no index.html) and case studies drop ".html"
+// (GitHub Pages serves awaed-web-trader.html at /awaed-web-trader).
+const RENAME = Object.fromEntries(PAGES.map((p) => [p.src, p.out === 'index.html' ? './' : p.out.replace(/\.html$/, '')]));
 
 function between(str, open, close) {
   const a = str.indexOf(open);
