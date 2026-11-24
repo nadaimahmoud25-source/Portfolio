@@ -10,6 +10,33 @@ const PAGES = [
   { src: 'CaseStudy-AwaedWeb.dc.html', out: 'awaed-web-trader.html' },
   { src: 'CaseStudy-Options.dc.html', out: 'options-trading.html' },
 ];
+// Site-only fixes, applied on every build so a fresh sync from the artifact keeps them.
+// The artifact pins its header and side menu with JS transforms (it scrolls inside
+// a canvas); on a real page that jitters, so the site uses CSS position: sticky.
+const SITE_CSS = `<style id="site-fixes">
+#pg-nav{position:sticky !important;top:0;transform:none !important;will-change:auto}
+#cs-toc-nav{transform:none !important}
+@media (min-width: 900px){.cs-aside{position:sticky;top:96px}}
+.xrow{border-radius:0 !important}
+.xrow,.xrow:hover{padding-left:0 !important;padding-right:0 !important}
+.xrow:hover{box-shadow:-12px 0 0 #F7F7F5,12px 0 0 #F7F7F5}
+.xrow > *{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+.xrow:hover > *{translate:4px 0}
+@media (prefers-reduced-motion: reduce){.xrow > *{transition:none}.xrow:hover > *{translate:none}}
+</style>`;
+const SITE_JS = `
+if (Component.prototype.pinInit) {
+  Component.prototype.pinInit = function () {
+    this.pinScroll = function () {
+      var n = document.getElementById('pg-nav');
+      if (n) n.setAttribute('data-pinned', window.scrollY > 8 ? '1' : '0');
+    };
+    window.addEventListener('scroll', this.pinScroll, { passive: true });
+    this.pinScroll();
+  };
+  Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
+  Component.prototype.pinMarks = function () { return []; };
+}`;
 const RENAME = Object.fromEntries(PAGES.map((p) => [p.src, p.out]));
 
 function between(str, open, close) {
@@ -52,6 +79,7 @@ for (const p of PAGES) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
 ${helmet.trim()}
+${SITE_CSS}
 </head>
 <body>
 <div id="dc-root"></div>
@@ -60,6 +88,7 @@ ${helmet.trim()}
 <script src="js/dc.js"></script>
 <script>
 ${logic.trim()}
+${SITE_JS}
 DC.mount(Component, ${JSON.stringify(defaults)});
 </script>
 </body>

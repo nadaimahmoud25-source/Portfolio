@@ -45,6 +45,17 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 @media (max-width: 699px){.cs-map,.cs-file,.cs-board{aspect-ratio:auto !important;grid-template-columns:minmax(0,1fr) !important}.cs-board > div + div{padding-left:0 !important;border-left:0 !important;padding-top:16px;border-top:1px solid #E0DFD9}.cs-map .cs-scrollbox{height:340px;margin:20px 20px 0 !important}.cs-file .cs-mosaic{height:300px}}
 @media (prefers-reduced-motion: reduce){.cs-up,.cs-rise,.cs-scroll,.cs-tick,.cs-pulse,.cs-float,.cs-ken{animation:none}.cs-tick{opacity:1}.cs-next .cs-shot,.cs-rv,.cs-fade,.cs-pick,.cs-page{transition:none}.cs-rv,.cs-page{opacity:1;transform:none}}
 </style>
+<style id="site-fixes">
+#pg-nav{position:sticky !important;top:0;transform:none !important;will-change:auto}
+#cs-toc-nav{transform:none !important}
+@media (min-width: 900px){.cs-aside{position:sticky;top:96px}}
+.xrow{border-radius:0 !important}
+.xrow,.xrow:hover{padding-left:0 !important;padding-right:0 !important}
+.xrow:hover{box-shadow:-12px 0 0 #F7F7F5,12px 0 0 #F7F7F5}
+.xrow > *{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+.xrow:hover > *{translate:4px 0}
+@media (prefers-reduced-motion: reduce){.xrow > *{transition:none}.xrow:hover > *{translate:none}}
+</style>
 </head>
 <body>
 <div id="dc-root"></div>
@@ -507,6 +518,19 @@ class Component extends DCLogic {
       modeSa: function () { self.setState({ mode: 'sa', modeAuto: false }); }
     };
   }
+}
+
+if (Component.prototype.pinInit) {
+  Component.prototype.pinInit = function () {
+    this.pinScroll = function () {
+      var n = document.getElementById('pg-nav');
+      if (n) n.setAttribute('data-pinned', window.scrollY > 8 ? '1' : '0');
+    };
+    window.addEventListener('scroll', this.pinScroll, { passive: true });
+    this.pinScroll();
+  };
+  Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
+  Component.prototype.pinMarks = function () { return []; };
 }
 DC.mount(Component, {});
 </script>

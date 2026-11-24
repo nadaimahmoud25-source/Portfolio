@@ -37,6 +37,17 @@ a{color:#0E0F11}a:hover{color:#2643E9}
 @media (max-width: 699px){.cs-steps{grid-template-columns:repeat(5,minmax(0,1fr)) !important}.cs-steps .cs-steplabel{display:none}}
 @media (prefers-reduced-motion: reduce){.cs-up,.cs-rise,.cs-float,.cs-float2,.cs-float3,.cs-bar{animation:none}.cs-next .cs-shot,.cs-rv,.cs-fade,.cs-seg{transition:none}.cs-rv{opacity:1;transform:none}}
 </style>
+<style id="site-fixes">
+#pg-nav{position:sticky !important;top:0;transform:none !important;will-change:auto}
+#cs-toc-nav{transform:none !important}
+@media (min-width: 900px){.cs-aside{position:sticky;top:96px}}
+.xrow{border-radius:0 !important}
+.xrow,.xrow:hover{padding-left:0 !important;padding-right:0 !important}
+.xrow:hover{box-shadow:-12px 0 0 #F7F7F5,12px 0 0 #F7F7F5}
+.xrow > *{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+.xrow:hover > *{translate:4px 0}
+@media (prefers-reduced-motion: reduce){.xrow > *{transition:none}.xrow:hover > *{translate:none}}
+</style>
 </head>
 <body>
 <div id="dc-root"></div>
@@ -485,6 +496,19 @@ class Component extends DCLogic {
       dirB: function () { self.setState({ dir: 'b', dirAuto: false }); }
     };
   }
+}
+
+if (Component.prototype.pinInit) {
+  Component.prototype.pinInit = function () {
+    this.pinScroll = function () {
+      var n = document.getElementById('pg-nav');
+      if (n) n.setAttribute('data-pinned', window.scrollY > 8 ? '1' : '0');
+    };
+    window.addEventListener('scroll', this.pinScroll, { passive: true });
+    this.pinScroll();
+  };
+  Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
+  Component.prototype.pinMarks = function () { return []; };
 }
 DC.mount(Component, {});
 </script>

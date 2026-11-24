@@ -51,6 +51,17 @@ a.card:focus-visible .cta{opacity:1;transform:none}
 @media (hover: none){.cta{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.card .shot,.card .float,.btn,.btn svg,.tile,.cta,.cta .arr,.ttl,.navlink,.xrow,.card .num{transition:none}.soon:hover .float{animation:none}a.card:hover .shot:not(.full),.soon:hover .shot,a.card:hover .float{translate:none;scale:none}a.card:hover .shot.full{translate:-50% -50%;scale:none}}
 </style>
+<style id="site-fixes">
+#pg-nav{position:sticky !important;top:0;transform:none !important;will-change:auto}
+#cs-toc-nav{transform:none !important}
+@media (min-width: 900px){.cs-aside{position:sticky;top:96px}}
+.xrow{border-radius:0 !important}
+.xrow,.xrow:hover{padding-left:0 !important;padding-right:0 !important}
+.xrow:hover{box-shadow:-12px 0 0 #F7F7F5,12px 0 0 #F7F7F5}
+.xrow > *{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+.xrow:hover > *{translate:4px 0}
+@media (prefers-reduced-motion: reduce){.xrow > *{transition:none}.xrow:hover > *{translate:none}}
+</style>
 </head>
 <body>
 <div id="dc-root"></div>
@@ -311,6 +322,19 @@ class Component extends DCLogic {
   renderVals() {
     return { accent: this.props.accent ?? '#2643E9', pmarks: this.pinMarks() };
   }
+}
+
+if (Component.prototype.pinInit) {
+  Component.prototype.pinInit = function () {
+    this.pinScroll = function () {
+      var n = document.getElementById('pg-nav');
+      if (n) n.setAttribute('data-pinned', window.scrollY > 8 ? '1' : '0');
+    };
+    window.addEventListener('scroll', this.pinScroll, { passive: true });
+    this.pinScroll();
+  };
+  Component.prototype.pinStop = function () { window.removeEventListener('scroll', this.pinScroll); };
+  Component.prototype.pinMarks = function () { return []; };
 }
 DC.mount(Component, {"accent":"#2643E9"});
 </script>
