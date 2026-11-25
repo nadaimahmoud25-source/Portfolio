@@ -62,7 +62,10 @@ for (const p of PAGES) {
   html = html.replace(/src: B \+ d\[1\],/g, "src: B + d[1] + '.webp',");
 
   // Links between artboards.
-  for (const [from, to] of Object.entries(RENAME)) html = html.split(`href="${from}"`).join(`href="${to}"`);
+  for (const [from, to] of Object.entries(RENAME)) {
+    html = html.split(`href="${from}"`).join(`href="${to}"`);
+    html = html.split(`href="${from}#`).join(`href="${to}#`);
+  }
 
   const title = between(html, '<title>', '</title>');
   const lang = (html.match(/<html lang="([^"]+)"/) || [, 'en'])[1];
