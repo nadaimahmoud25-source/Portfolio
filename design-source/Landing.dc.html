@@ -234,6 +234,20 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
   .h2-stage,.h2-btn b,.h2-burger span,.h2-menu,.pr-img img,.pr-img svg{transition:none}
   .ill-draw,.net,.net-main{animation:none;stroke-dashoffset:0}.net,.net-main,.ill-pulse,.ill-flow,.ill-pop,.ill-cursor,.ill-spin,.ill-spin2,.ill-type rect,.ill-a,.ill-b,.ill-c,.ill-stack{animation:none}
 }
+/* experience: a short timeline of roles */
+.xp{padding:clamp(72px,9vw,120px) 0}
+.xp-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;margin-bottom:36px}
+.xp-head .n{margin:0 0 10px;font-size:15px;color:var(--ink)}
+.xp-head h2{margin:0;font-family:var(--head);font-size:clamp(34px,4vw,52px);line-height:1;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.xp-head .yrs{margin:0 0 6px;font-size:15px;font-weight:600;color:var(--ink)}
+.xp-list{margin:0;padding:0;list-style:none;border-bottom:1px solid #E6E6E3}
+.xp-row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(0,1.3fr);align-items:baseline;gap:16px;padding:22px 0;border-top:1px solid #E6E6E3}
+.xp-yr{font-size:15px;color:var(--grey);font-variant-numeric:tabular-nums}
+.xp-role{margin:0;font-size:clamp(17px,1.5vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.xp-role span{font-weight:400;color:var(--grey)}
+.xp-dom{justify-self:end;text-align:right;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#8A8D93}
+.xp-note{margin:20px 0 0;font-size:15px;color:var(--soft)}
+@media (max-width: 760px){.xp-row{grid-template-columns:1fr;gap:6px}.xp-dom{justify-self:start;text-align:left}}
 /* top navigation: sticks to the top with a white bar once you scroll; links sit inline on desktop, the menu button takes over on small screens */
 .h2-wrap > .h2-nav{position:sticky;top:0;z-index:30}
 .h2-nav::before{content:"";position:absolute;top:0;bottom:0;left:-100vmax;right:-100vmax;z-index:-1;background:#FFFFFF;box-shadow:0 1px 0 rgba(14,15,17,.08);opacity:0;transition:opacity .3s ease}
@@ -248,9 +262,9 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
 @media (max-width: 760px){.h2-links{display:none}.h2-nav .h2-burger{display:flex}}
 /* scroll reveals: blocks start hidden (only when scripts run and motion is allowed) and ease in when the script sets data-in */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
-.h2-whead,.pr-head{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
-.h2-card,.pr-row{opacity:0;translate:0 48px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1s cubic-bezier(.22,1,.36,1)}
-.h2-whead[data-in],.pr-head[data-in],.h2-card[data-in],.pr-row[data-in]{opacity:1;translate:0 0}
+.h2-whead,.pr-head,.xp-head{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
+.h2-card,.pr-row,.xp-list{opacity:0;translate:0 48px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1s cubic-bezier(.22,1,.36,1)}
+.h2-whead[data-in],.pr-head[data-in],.h2-card[data-in],.pr-row[data-in],.xp-head[data-in],.xp-list[data-in]{opacity:1;translate:0 0}
 }
 </style>
 <script>
@@ -295,7 +309,7 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
 <div class="h2-photo h2-rise"><img src="/_blob/614049d65ce39645a4a11e76d156a4f8" alt="Nada Ibrahim, smiling, in a white headscarf and shirt" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
 <h1 class="h2-h1 h2-rise h2-d1"><span>Nada Ibrahim</span><span>Senior Product Designer</span></h1>
 <p class="h2-lede h2-rise h2-d2">I turn unclear briefs into shipped products, and bring business, product and engineering along the way. Right now I’m at Awaed, designing investment and trading for the Saudi and US markets.</p>
-<a class="h2-btn h2-rise h2-d3" href="mailto:nada.i.mahmoud25@gmail.com">Get in touch<b aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></b></a>
+<a class="h2-btn h2-rise h2-d3" href="https://www.linkedin.com/in/nada-ibrahim-120769132/" target="_blank" rel="noopener">Get in touch<b aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></b></a>
 </section>
 <div class="h2-snaps h2-rise h2-d4" role="img" aria-label="Snapshots of my work: Awaed Options, Web Trader and the Awaed mobile app"><div class="h2-sbox" aria-hidden="true">
 <div class="snap sc-dark"><div class="h2-glow"></div><div class="h2-slab"></div><div class="h2-grain"></div><div class="dev-lap"><div class="scr"><img src="/_blob/57257e292df3d642d136cbfd41e182e3" alt=""></div><div class="base"></div></div><div class="dev-phone"><span class="vol a"></span><span class="vol b"></span><span class="vol c"></span><img src="/_blob/4dbdbdc9998aa7c5516cb36dab3ee7d5" alt=""></div></div>
@@ -374,6 +388,19 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
 </article>
 </div>
 </section>
+
+<section id="experience" class="xp">
+<div class="xp-head"><div><p class="n">03</p><h2>Experience</h2></div><p class="yrs">(2020 – 2026)</p></div>
+<ul class="xp-list">
+<li class="xp-row"><span class="xp-yr">2025 – Now</span><p class="xp-role">Senior Product Designer <span>· Awaed</span></p><span class="xp-dom">Investment · KSA</span></li>
+<li class="xp-row"><span class="xp-yr">2024 – Now</span><p class="xp-role">Lead UX/UI Coach, part-time <span>· neuefische</span></p><span class="xp-dom">Education · Germany</span></li>
+<li class="xp-row"><span class="xp-yr">2023 – 2025</span><p class="xp-role">Senior Product Designer <span>· Bosta</span></p><span class="xp-dom">Logistics · Egypt</span></li>
+<li class="xp-row"><span class="xp-yr">2023 – 2025</span><p class="xp-role">Senior Product Designer, part-time <span>· Flex AI</span></p><span class="xp-dom">AI fitness · Canada</span></li>
+<li class="xp-row"><span class="xp-yr">2021 – 2023</span><p class="xp-role">UI/UX Designer <span>· Blink22</span></p><span class="xp-dom">SaaS, e-commerce, fintech · Dubai</span></li>
+<li class="xp-row"><span class="xp-yr">2021 – 2022</span><p class="xp-role">UI/UX Designer <span>· Asgatech</span></p><span class="xp-dom">E-learning, health, government · KSA</span></li>
+</ul>
+<p class="xp-note">Freelancing since 2020, and taught UI/UX at UX Gate from 2023 to 2024.</p>
+</section>
 </div>
 </div>
 </x-dc>
@@ -410,7 +437,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { clearInterval(this.clock); if (this.navScroll) window.removeEventListener('scroll', this.navScroll); if (this.srIo) this.srIo.disconnect(); if (this.prio) this.prio.disconnect(); if (this.drawIo) this.drawIo.disconnect(); window.removeEventListener('resize', this.wireLayout); }
   revealInit() {
-    var els = document.querySelectorAll('.h2-whead, .h2-card, .pr-head, .pr-row');
+    var els = document.querySelectorAll('.h2-whead, .h2-card, .pr-head, .pr-row, .xp-head, .xp-list');
     var show = function (el) { el.setAttribute('data-in', '1'); };
     if (typeof IntersectionObserver === 'undefined') { for (var j = 0; j < els.length; j++) show(els[j]); return; }
     var vh = window.innerHeight || 800;
