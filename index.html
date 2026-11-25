@@ -230,6 +230,18 @@ a.h2-card:hover .h2-cap .ttl{background-size:100% 1px}
   .h2-stage,.h2-btn b,.h2-burger span,.h2-menu,.pr-img img,.pr-img svg{transition:none}
   .ill-draw,.net,.net-main{animation:none;stroke-dashoffset:0}.net,.net-main,.ill-pulse,.ill-flow,.ill-pop,.ill-cursor,.ill-spin,.ill-spin2,.ill-type rect,.ill-a,.ill-b,.ill-c,.ill-stack{animation:none}
 }
+/* top navigation: sticks to the top with a white bar once you scroll; links sit inline on desktop, the menu button takes over on small screens */
+.h2-wrap > .h2-nav{position:sticky;top:0;z-index:30}
+.h2-nav::before{content:"";position:absolute;top:0;bottom:0;left:-100vmax;right:-100vmax;z-index:-1;background:#FFFFFF;box-shadow:0 1px 0 rgba(14,15,17,.08);opacity:0;transition:opacity .3s ease}
+.h2-nav[data-pinned="1"]::before{opacity:1}
+.h2-links{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(18px,2.2vw,32px)}
+.h2-links a{position:relative;padding:6px 0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.h2-links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.h2-links a:hover::after,.h2-links a:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.h2-nav .h2-burger{display:none}
+@media (max-width: 1000px){.h2-where{display:none}}
+@media (min-width: 761px){.h2-menu{display:none}}
+@media (max-width: 760px){.h2-links{display:none}.h2-nav .h2-burger{display:flex}}
 /* scroll reveals: blocks start hidden (only when scripts run and motion is allowed) and ease in when the script sets data-in */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
 .h2-whead,.pr-head{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.22,1,.36,1),translate .9s cubic-bezier(.22,1,.36,1)}
@@ -279,11 +291,17 @@ section[id]{scroll-margin-top:88px}
 <header class="h2-nav">
 <a class="h2-mark" href="#top">NADA IBRAHIM</a>
 <p class="h2-where" style="margin: 0"><span>Working remotely</span></p>
+<nav class="h2-links" aria-label="Main">
+<a href="#work">Work</a>
+<a href="#process">How I work</a>
+<a href="Nada-Ibrahim-Resume.pdf" download>Résumé</a>
+<a href="mailto:nada.i.mahmoud25@gmail.com">Get in touch</a>
+</nav>
 <button class="h2-burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}"><span></span><span></span></button>
-<nav class="h2-menu" aria-label="Main" style="{{ menuStyle }}">
+<nav class="h2-menu" aria-label="Main menu" style="{{ menuStyle }}">
 <a href="#work" onClick="{{ closeMenu }}">Work</a>
 <a href="#process" onClick="{{ closeMenu }}">How I work</a>
-<a href="Nada-Ibrahim-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+<a href="Nada-Ibrahim-Resume.pdf" download>Résumé</a>
 <a href="mailto:nada.i.mahmoud25@gmail.com">Get in touch</a>
 </nav>
 </header>
@@ -399,12 +417,16 @@ class Component extends DCLogic {
     var self = this;
     this.wiresInit();
     this.revealInit();
+    var navEl = document.querySelector('.h2-nav');
+    this.navScroll = function () { if (navEl) navEl.setAttribute('data-pinned', (window.scrollY || window.pageYOffset) > 8 ? '1' : '0'); };
+    window.addEventListener('scroll', this.navScroll, { passive: true });
+    this.navScroll();
     var startDraw = function () { var as = document.querySelectorAll('.pr-img.c1 animate, .pr-img.c1 animateMotion'); for (var i = 0; i < as.length; i++) { try { as[i].beginElement(); } catch (e) {} } };
     var prSec = document.getElementById('process');
     if (!prSec || typeof IntersectionObserver === 'undefined') startDraw();
     else { this.drawIo = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { startDraw(); self.drawIo.disconnect(); } }); this.drawIo.observe(prSec); }
   }
-  componentWillUnmount() { clearInterval(this.clock); if (this.srIo) this.srIo.disconnect(); if (this.prio) this.prio.disconnect(); if (this.drawIo) this.drawIo.disconnect(); window.removeEventListener('resize', this.wireLayout); }
+  componentWillUnmount() { clearInterval(this.clock); if (this.navScroll) window.removeEventListener('scroll', this.navScroll); if (this.srIo) this.srIo.disconnect(); if (this.prio) this.prio.disconnect(); if (this.drawIo) this.drawIo.disconnect(); window.removeEventListener('resize', this.wireLayout); }
   revealInit() {
     var els = document.querySelectorAll('.h2-whead, .h2-card, .pr-head, .pr-row');
     var show = function (el) { el.setAttribute('data-in', '1'); };
